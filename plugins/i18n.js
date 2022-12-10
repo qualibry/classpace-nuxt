@@ -10,7 +10,9 @@ const i18n = new VueI18n({
 
 export default async ({ app, store }) => {
     if (process.client) {
-        await loadLocale(app.$cookies.get('locale') || 'ru')
+        const locale = app.$cookies.get('locale') || 'ru'
+        await store.dispatch('locale/setLocale', { locale })
+        await loadLocale(locale)
     }
   
     app.i18n = i18n
