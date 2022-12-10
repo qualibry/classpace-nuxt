@@ -60,7 +60,12 @@ export const actions = {
         const client = await apiClient
 
         try {
-            await client.apis.user.registerUser({}, { requestBody: requestBody })
+            await client.apis.user.registerUser({}, {
+                requestBody: requestBody,
+                requestInterceptor: request => {
+                    request.headers['accept-language'] = Cookies.get('locale')
+                }
+            })
             commit('SET_REGISTRATION_ERRORS', {})
         } catch (e) {
             commit('SET_REGISTRATION_ERRORS', e.response.body.detail)
@@ -71,7 +76,12 @@ export const actions = {
         const client = await apiClient
 
         try {
-            var response = await client.apis.user.authenticateUser({}, { requestBody: requestBody })
+            var response = await client.apis.user.authenticateUser({}, {
+                requestBody: requestBody,
+                requestInterceptor: request => {
+                    request.headers['accept-language'] = Cookies.get('locale')
+                }, 
+            })
             this.$cookies.set('token', response.body.access_token)
             commit('SET_ACCESS_TOKEN', response.body.access_token)
             commit('SET_LOGIN_ERROR', undefined)
@@ -83,18 +93,13 @@ export const actions = {
     async getCurrentUser({ commit }) {
         const client = await apiClient
         const accessToken = this.$cookies.get('token')
-        
-        try {
-            const response = await client.apis.user.currentUserInfo({}, {
-                requestInterceptor: (request) => {
-                    request.headers.Authorization = `Bearer ${accessToken}`
-                }
-            })
-            commit('SET_CURRENT_USER', response.body)
-        } catch (e) {
-            //Cookies.remove('token')
-            throw e
-        }
+        const response = await client.apis.user.currentUserInfo({}, {
+            requestInterceptor: (request) => {
+                request.headers.Authorization = `Bearer ${accessToken}`
+                request.headers['accept-language'] = Cookies.get('locale')
+            }
+        })
+        commit('SET_CURRENT_USER', response.body)
     },
     async updateUser({ commit }, requestBody) {
         const client = await apiClient
@@ -104,6 +109,7 @@ export const actions = {
             const response = await client.apis.authentication.updateCurrentUser({}, {
                 requestInterceptor: (request) => {
                     request.headers.Authorization = `Bearer ${accessToken}`
+                    request.headers['accept-language'] = Cookies.get('locale')
                 },
                 requestBody: requestBody,
             })
@@ -122,6 +128,7 @@ export const actions = {
             const response = await client.apis.user.addProfilePicture({}, {
                 requestInterceptor: (request) => {
                     request.headers.Authorization = `Bearer ${accessToken}`
+                    request.headers['accept-language'] = Cookies.get('locale')
                 },
                 requestBody: requestBody,
             })
@@ -142,6 +149,7 @@ export const actions = {
             await client.apis.user.resetUserPassword({token: token}, {
                 requestInterceptor: (request) => {
                     request.headers.Authorization = `Bearer ${accessToken}`
+                    request.headers['accept-language'] = Cookies.get('locale')
                 },
                 requestBody: data,
             })
