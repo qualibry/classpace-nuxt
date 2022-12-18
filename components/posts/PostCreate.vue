@@ -2,7 +2,7 @@
     <div class="attachments-add">
         <div class="flex align-items-center mb-3">
             <Button @click.prevent="back()" icon="pi pi-arrow-left" class="p-button-rounded p-button-text p-button-plain mr-2" />
-            <h2 class="my-0">{{ post.id ? post.title : 'Add new post' }}</h2>
+            <h2 class="my-0">{{ post.id ? post.title : $t('posts.addNewOne') }}</h2>
         </div>
         <div class="grid">
             <div class="col-12 xl:col-5">
@@ -23,15 +23,15 @@
                 <Textarea v-model="form.text" placeholder="Text of room" autoresize="true" class="block w-full mb-3" rows="6" />
 
                 <Divider align="center" type="dashed" class="text-sm">
-                    <b>Attach files</b>
+                    <b>{{ $t('posts.attachFiles') }}</b>
                 </Divider>
 
                 <FileUpload name="demo[]" :customUpload="true" @uploader="createAttachments" v-model="this.attachments" :multiple="true"/>
-                <Button @click.prevent="createPost()" class="mt-3">{{ post.id ? 'Update post' : 'Create post' }}</Button>
+                <Button @click.prevent="createPost()" class="mt-3">{{ post.id ?  $t('posts.updateText') : $t('posts.createText') }}</Button>
             </div>
             <div class="col-12 xl:col-4">
                 <div class="bg-white border-solid border-1 p-3 border-round-lg border-300">
-                    <h3 class="my-0">Attached files</h3>
+                    <h3 class="my-0">{{ $t('posts.attachedFiles') }}</h3>
                     <AttachmentList :editable="true" />
                     <Divider />
                 </div>
@@ -72,8 +72,8 @@ export default {
                 type: this.$route.query.type || 'material'
             },
             postTypes: [
-                {name: 'Course material', value: 'material'},
-                {name: 'Homework', value: 'homework'},
+                {name: this.$t('posts.materialType'), value: 'material'},
+                {name: this.$t('posts.homeworkType'), value: 'homework'},
             ],
             type: undefined,
         }
@@ -99,9 +99,9 @@ export default {
             await this.create(postForm)
 
             this.$toast.add({
-                severity:'success',
-                summary:'Success',
-                detail:'Post Added',
+                severity: 'success',
+                summary: this.$t('basic.successPop'),
+                detail: this.$t('posts.createSuccess'),
                 life: 3000
             })
 

@@ -12,8 +12,8 @@ export default {
             this.$store.commit('attachments/SET_ITEMS', newAttachments)
             this.$toast.add({
                 severity:'info',
-                summary:'Success',
-                detail:`Attachments added`,
+                summary: this.$t('basics.successPop'),
+                detail: this.$t('posts.attachmentAdded'),
                 life: 3000,
             })
         },

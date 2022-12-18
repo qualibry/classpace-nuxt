@@ -15,14 +15,14 @@
         >
             <template #header>
                 <h3>
-                    {{ post.title + $t(` assignment` )}}
+                    {{ $t('homeworks.assignmentTitle') + ' ' + post.title}}
                 </h3>
             </template>
             <AssignmentCreate />
         </Dialog>
         <div class="grid">
             <div class="col-12 xl:col-8">
-                <span class="text-sm mb-1 mt-3 block">Description:</span>
+                <span class="text-sm mb-1 mt-3 block">{{ $t('homeworks.description') }}:</span>
                 <p class="text-lg mt-0">{{ post.description }}</p>
                 <div class="flex" v-if="post.is_assignable">
                     <Button
@@ -30,14 +30,14 @@
                         class="p-button-outlined"
                         @click="goToPostAssignmentsList"
                     >
-                        Assigned Homeworks ({{ post.assignments_count }})
+                        {{ $t('homeworks.assignedHomeworksCount') }} ({{ post.assignments_count }})
                     </Button>
                     <Button
                         v-else-if="currentParticipation.can_assign_homeworks"
                         class="p-button-outlined"
                         @click="changeAssignmentVisibility"
                     >
-                        Assignment
+                        {{ $t('homeworks.showAssignment') }}
                     </Button>
                 </div>
                 <Divider />
@@ -45,7 +45,7 @@
             </div>
             <div class="col-12 xl:col-4">
                 <div class="bg-white border-solid border-1 p-3 border-round-lg border-300">
-                    <h3 class="mt-0 mb-3">Attached files</h3>
+                    <h3 class="mt-0 mb-3">{{ $t('posts.attachedFiles') }}</h3>
                     <AttachmentList />
                     <Divider />
                 </div>

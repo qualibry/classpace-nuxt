@@ -64,8 +64,8 @@ export default {
             if(!attachment.id) {
                 this.$toast.add({
                     severity: 'error',
-                    summary: "Can't download attachment",
-                    detail: "The attached file isn't uploaded!",
+                    summary: this.$t('posts.attachmentDownloadError'),
+                    detail: this.$t('homeworks.attachmentNotUploadedError'),
                     life: 3000
                 })
                 return
