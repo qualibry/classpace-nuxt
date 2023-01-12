@@ -45,3 +45,4 @@ networks:
 
 volumes:
   certbot_volume:
+    external: True

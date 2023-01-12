@@ -98,7 +98,7 @@ export const actions = {
                 request.headers.Authorization = `Bearer ${accessToken}`
                 request.headers['accept-language'] = Cookies.get('locale')
             }
-        })
+        })  
         commit('SET_CURRENT_USER', response.body)
     },
     async updateUser({ commit }, requestBody) {
@@ -106,7 +106,7 @@ export const actions = {
         const accessToken = this.$cookies.get('token')
 
         try {
-            const response = await client.apis.authentication.updateCurrentUser({}, {
+            const response = await client.apis.user.updateCurrentUser({}, {
                 requestInterceptor: (request) => {
                     request.headers.Authorization = `Bearer ${accessToken}`
                     request.headers['accept-language'] = Cookies.get('locale')
