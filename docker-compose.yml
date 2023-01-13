@@ -36,12 +36,7 @@ services:
       - classroom-network
 
 networks:
-  default:
-    external: 
-      name: classroom-network
   classroom-network:
-    name: classroom_backend_classroom-network
-    external: true
 
 volumes:
   certbot_volume:
