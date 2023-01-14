@@ -6,7 +6,7 @@
                 class="p-button-rounded p-button-text p-button-plain mr-2"
                 @click="goBack"
             />
-            <h2 class="my-0">{{ $t('Assigned homeworks') }} ({{assignments.total}})</h2>
+            <h2 class="my-0">{{ $t('homeworks.assignedHomeworksCount') }} ({{assignments.total}})</h2>
         </div>
         <Dialog
           :visible="displayAssignment"
@@ -18,8 +18,8 @@
             <h3>
               {{`Homework: ` + currentAssignment.post.title}}
               <p class="header-footer">{{`Room: ` + currentAssignment.post.room.name}}</p>
-              <p class="header-footer">{{ $t(`Student: ` ) + currentAssignment.author.full_name}}</p>
-              <p class="header-footer">Status: <Badge :value="currentAssignment.status" /></p> 
+              <p class="header-footer">{{ $t('homeworks.studentColumn') + currentAssignment.author.full_name}}</p>
+              <p class="header-footer">{{ $t('homeworks.status') }}: <Badge :value="currentAssignment.status" /></p> 
             </h3>
           </template>
           <SelectButton v-model="accept" :options="options" class="mb-3 mt-1"/>
@@ -40,12 +40,12 @@
                     </Column>
                     <Column
                         field="author.first_name"
-                        header="First Name"
+                        :header="$t('basics.firstName')"
                         :sortable="true"
                     >
                     </Column>
-                    <Column field="author.last_name" header="Last Name" :sortable="true"></Column>
-                    <Column field="author.middle_name" header="Middle Name" :sortable="true"></Column>
+                    <Column field="author.last_name" :header="$t('basics.firstName')" :sortable="true"></Column>
+                    <Column field="author.middle_name" :header="$t('basics.lastName')" :sortable="true"></Column>
                     <Column field="status" header="Status" :sortable="true">
                         <template class="cocv" #body="assignment">
                             <Badge
@@ -64,14 +64,14 @@
                             severity="info"
                             style="cursor: pointer;"
                             >
-                            Open
+                            {{ $t('homeworks.showAssignment') }}
                             </Button>
                         </template>
                     </Column>
                 </DataTable>
             </div>
             <div class="col-12 xl:col-5" v-else>
-                {{ $t('No assigned homeworks for now') }}
+                {{ $t('homeworks.noAssignments') }}
             </div>
         </div>
     </div>

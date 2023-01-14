@@ -5,32 +5,32 @@
             <NuxtLink to="/rooms">
                 <Button icon="pi pi-arrow-left" class="p-button-rounded p-button-text p-button-plain mr-2" />
             </NuxtLink>
-            <h2 class="my-0">Room: {{ room.name }}</h2>
+            <h2 class="my-0">{{ $t('rooms.roomName') }}: {{ room.name }}</h2>
             <Button v-if="currentParticipation.is_moderator" type="button" label="Room manage" class="ml-auto" @click="toggleManageRoom" aria-haspopup="true" aria-controls="overlay_menu" />
             <Menu v-if="currentParticipation.is_moderator" id="overlay_menu" ref="menu" :model="items" :popup="true" />
         </div>
         <div class="grid">
             <div class="col-12 xl:col-8">
-                <div class="text-sm">Creator: <b>{{ room.author.full_name }}</b></div>
-                <span class="text-sm mb-1 mt-3 block">Description:</span>
+                <div class="text-sm">{{ $t('rooms.roomCreator') }}: <b>{{ room.author.full_name }}</b></div>
+                <span class="text-sm mb-1 mt-3 block">{{ $t('rooms.roomDescription') }}:</span>
                 <p class="text-lg mt-0">{{ room.description }}</p>
                 <div>
-                    <span class="text-sm mb-2 block">Link to join:</span>
+                    <span class="text-sm mb-2 block">{{ $t('rooms.linkToJoin') }}:</span>
                     <div class="col-5 p-0 mb-4">
                         <div class="p-inputgroup" v-if="currentParticipation.is_moderator">
                             <InputText placeholder="Link to join" v-model="joinLink" disabled />
-                            <Button label="Copy to clipboard" @click.prevent="copyJoinLink()" />
+                            <Button :label="$t('rooms.copyToClipboard')" @click.prevent="copyJoinLink()" />
                         </div>
                     </div>
                 </div>
                 <div class="flex">
-                    <Button v-if="currentParticipation.can_manage_assignments" class="p-button-outlined">Show Homeworks (3)</Button>
+                    <Button v-if="currentParticipation.can_manage_assignments" class="p-button-outlined">{{ $t('homeworks.assignedHomeworksCount') }}</Button>
                 </div>
                 <Divider />
                 <div class="grid">
                     <div class="col-12 xl:col-6">
                         <div class="flex align-items-center">
-                            <h3>Course materials</h3>
+                            <h3>{{ $t('rooms.materials') }}</h3>
                             <NuxtLink v-if="currentParticipation.can_manage_posts" :to="'/rooms/add-post/' + room.id + '?type=material'">
                                 <Button icon="pi pi-plus" class="p-button-rounded p-button-text p-button-sm ml-2" v-tooltip.top="'Add materials'" />
                             </NuxtLink>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="col-12 xl:col-6">
                         <div class="flex align-items-center">
-                            <h3>Homeworks</h3>
+                            <h3>{{ $t('rooms.homeworks') }}</h3>
                             <NuxtLink v-if="currentParticipation.can_manage_posts" :to="'/rooms/add-post/' + room.id + '?type=homework'">
                                 <Button icon="pi pi-plus" class="p-button-rounded p-button-text p-button-sm ml-2" v-tooltip.top="'Add homework'" />
                             </NuxtLink>
@@ -50,7 +50,7 @@
             </div>
             <div class="col-12 xl:col-4">
                 <div class="bg-white border-solid border-1 p-3 border-round-lg border-300">
-                    <h3 class="my-0">Members of the room</h3>
+                    <h3 class="my-0">{{ $t('rooms.membersInfo') }}</h3>
                     <Divider />
                     <Participants />
                 </div>

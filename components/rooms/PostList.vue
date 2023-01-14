@@ -18,18 +18,18 @@
                 <Divider />
                 <div class="flex align-items-center text-sm">
                     <span class="time text-gray-500">{{ new Date(item.created_at) | dateFormat('YYYY.MM.DD') }}</span>
-                    <span class="files ml-auto">{{ item.attachments_count }} files attached</span>
+                    <span class="files ml-auto">{{ item.attachments_count }} {{ $t('posts.filesAttached') }}</span>
                 </div>
             </div>
             <template v-if="currentParticipation.can_manage_posts">
                 <Divider />
                 <Button class="p-button-sm px-2 py-1" @click="redirectToUpdate(item)">
                     <i class="pi pi-pencil mr-2" style="font-size:0.9rem"></i>
-                    Edit
+                    {{ $t('posts.editButton') }}
                 </Button>
                 <Button @click.prevent="deletePostHelper(item)" class="p-button-sm p-button-danger px-2 py-1 mr-2">
                     <i class="pi pi-times mr-2" style="font-size:0.9rem"></i>
-                    Delete
+                    {{ $t('posts.deleteButton') }}
                 </Button>
             </template>
         </div>

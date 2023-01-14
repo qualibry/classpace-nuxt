@@ -137,9 +137,9 @@
                     this.$router.push({ name: 'login' })
                     this.$toast.add({
                         severity: 'success',
-                        summary: "Registration success!",
-                        detail: "Check out your email to activate your profile.",
-                        life: 3000
+                        summary: this.$t('registration.successTest'),
+                        detail: this.$t('registration.checkoutEmailAfterRegistration'),
+                        life: 12000
                     })
                 }
             }

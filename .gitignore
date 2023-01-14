@@ -88,3 +88,8 @@ sw.*
 
 # Vim swap files
 *.swp
+
+nginx/certbot/conf*
+nginx/certbot/www/*
+!nginx/certbot/conf/.gitkeep
+!nginx/certbot/www/.gitkeep

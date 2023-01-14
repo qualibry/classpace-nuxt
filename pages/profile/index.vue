@@ -1,7 +1,7 @@
 <template>
     <div class="user-profile">
         <template v-if="!loading">
-            <h2 class="mt-0">Your profile info</h2>
+            <h2 class="mt-0">{{$t('profileInfo')}}</h2>
             <div class="grid">
                 <div class="col-12 xl:col-8">
                     <div class="flex align-items-center mb-6">
@@ -31,11 +31,6 @@
                     <InputText id="first_name" v-model="form.middle_name" class="block w-full mb-4" />
                     <label for="first_name" class="mb-1 block">Last name</label>
                     <InputText id="first_name" v-model="form.last_name" class="block w-full mb-5" />
-                    
-                    <Divider align="left" type="dashed">
-                        Notifications
-                    </Divider>
-                    <Button @click.prevent="requestPushNotifications">Allow push notifications</Button>
                     
                     <Divider align="left" type="dashed">
                         Credentials
@@ -103,7 +98,7 @@ export default {
             await this.updateUser(requestBody)
         },
         async updateUser() {
-            await this.$store.dispatch('users/getCurrentUser')
+            await this.$store.dispatch('users/updateUser', this.form)
         },
         activateInput() {
             document.getElementById('chooser_avatar').click()
@@ -142,12 +137,6 @@ export default {
     width: 0;
     height: 0;
 }
-
-
-/* .inputSwitch {
-    height: 1rem;
-    width: 3rem;
-} */
 
 .img_container {
     display: flex;

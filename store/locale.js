@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie'
+import { apiClient } from '@/utils/api.js'
 
 export const namespaced = true
 
@@ -6,7 +7,7 @@ export const state = () => ({
     locale: 'ru',
     locales: {
         ru: 'Русский',
-        'gb': 'English'
+        en: 'English'
     }
 })
 
@@ -22,9 +23,22 @@ export const mutations = {
 }
 
 export const actions = {
-    setLocale ({ commit }, { locale }) {
-        commit('SET_LOCALE', { locale })
+    async setLocale({ commit }, { locale }) {
+        const client = await apiClient
 
+        try {
+          await client.apis.localization.changeLocalization(
+            {},
+            {
+                requestBody: {language_code: locale}
+            },
+          )
+          commit('SET_LOCALE', { locale })
+          Cookies.set('locale', locale, { expires: 365 })
+        } catch (e) {
+          console.error(e)
+          commit('SET_ERRORS', e.response?.body?.detail)
+        }
         Cookies.set('locale', locale, { expires: 365 })
     }
 }

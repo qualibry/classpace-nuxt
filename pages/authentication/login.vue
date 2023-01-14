@@ -15,6 +15,7 @@
                                 <span class="p-input-icon-left d-block w-full mb-0">
                                     <i class="pi pi-inbox" />
                                     <InputText type="email" v-model="form.email" :placeholder="$t('login.placeholders.email')" class="w-full" />
+                                    <span v-if="errors.email" class="error text-red-400">{{ errors.email }}</span>
                                 </span>
                             </div>
                             <Divider align="center" type="dashed" class="text-sm">
@@ -24,6 +25,7 @@
                                 <span class="p-input-icon-left d-block w-full">
                                     <i class="pi pi-phone" />
                                     <InputText type="text" v-model="form.phone_number" :placeholder="$t('login.placeholders.phone')" class="w-full" />
+                                    <span v-if="errors.email" class="error text-red-400">{{ errors.phone }}</span>
                                 </span>
                             </div>
                             <Divider align="center" type="dashed" class="text-sm">
@@ -37,7 +39,14 @@
                                 <Checkbox id="remember" v-model="form.remember" :binary="true" />
                                 <label for="remember">{{ $t('login.remember') }}</label>
                             </div>
-                            <Button @click.prevent="loginUser()" :loading="loading" class="w-full text-center block">{{ $t('login.button') }}</Button>
+                            <Button
+                                @click.prevent="loginUser()"
+                                :loading="loading"
+                                class="w-full text-center block"
+                                :disabled="!allowLogin"
+                            >
+                                {{ $t('login.button') }}
+                            </Button>
                         </template>
                     </Card>
                     <NuxtLink to="/recovery">
@@ -78,10 +87,16 @@
             }
         },
 
-        computed: mapGetters({
-            error: 'users/loginError',
-            authenticationToken: 'users/authenticationToken'
-        }),
+        computed: {
+            ...mapGetters({
+                error: 'users/loginError',
+                errors: 'users/registrationErrors',
+                authenticationToken: 'users/authenticationToken'
+            }),
+            allowLogin() {
+                return (this.form.email || this.form.phone_number) && (this.form.password)
+            }
+        },
 
         async created() {
             await this.$store.commit('users/SET_LOGIN_ERROR', undefined)
@@ -103,7 +118,7 @@
                         severity:'error',
                         summary:'Error',
                         detail:this.error,
-                        life: 3000
+                        life: 15000,
                     })
                 }
 

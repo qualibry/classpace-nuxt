@@ -2,8 +2,8 @@
   <div>
     <div class="grid">
         <div class="col-12 xl:col-8">
-            <h3>Status: <Badge
-                :value="assignment.status || 'unassigned'"
+            <h3>{{ $t('homeworks.status') }}: <Badge
+                :value="assignment.status || $t('homeworks.unassignedStatus')"
                 :severity="statusState"
                 >
                 </Badge>
@@ -24,8 +24,8 @@
         <div class="col-12 xl:col-4">
             <div class="bg-white border-solid border-1 p-3 border-round-lg border-300">
                 <h3 class="my-0">
-                    Attached files
-                    <b>Edit: {{ attachFiles ? 'ON' : 'OFF' }}.</b>
+                    {{ $t('posts.attachedFiles') }}
+                    <b>: {{ attachFiles ? $t('homeworks.assignAttach') : $t('homeworks.assignDownload') }}</b>
                 </h3>
                 <InputSwitch v-model="attachFiles" />
                 <AttachmentList :editable="attachFiles" />
@@ -98,8 +98,8 @@ export default {
 
                 this.$toast.add({
                     severity: 'success',
-                    summary: "Your homework has been assigned!",
-                    detail: "Keep on the great work!",
+                    summary: this.$t('homeworks.assignedSuccess'),
+                    detail: this.$t('homeworks.encourageMessage'),
                     life: 3000
                 })
             }
@@ -110,8 +110,8 @@ export default {
 
             this.$toast.add({
                 severity: 'success',
-                summary: "Assignment updated!",
-                detail: "Keep on the great work!",
+                summary: this.$t('homeworks.assignedSuccess'),
+                detail: this.$t('homeworks.encourageMessage'),
                 life: 3000
             })
         },
