@@ -122,6 +122,9 @@
         "createText": "Добавить",
         "createSuccess": "Пост добавлен",
         "attachmentDownloadError": "Не удалось скачать файл",
-        "attachmentAdded": "Вложения добавлены"
+        "attachmentAdded": "Вложения добавлены",
+        "titlePlaceholderCreate": "Заголовок поста", 
+        "descriptionPlaceholderCreate": "Заголовок поста",
+        "textPlaceholderCreate": "Текст поста"
     }
 }

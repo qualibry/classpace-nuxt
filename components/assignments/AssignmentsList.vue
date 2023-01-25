@@ -18,7 +18,7 @@
             <h3>
               {{`Homework: ` + currentAssignment.post.title}}
               <p class="header-footer">{{`Room: ` + currentAssignment.post.room.name}}</p>
-              <p class="header-footer">{{ $t('homeworks.studentColumn') + currentAssignment.author.full_name}}</p>
+              <p class="header-footer">{{ $t('homeworks.studentColumn') + ': '+ currentAssignment.author.full_name}}</p>
               <p class="header-footer">{{ $t('homeworks.status') }}: <Badge :value="currentAssignment.status" /></p> 
             </h3>
           </template>

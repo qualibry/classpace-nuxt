@@ -63,6 +63,21 @@
         "eula": "Accept EULA",
         "button": "Sign up for free"
     },
+    "posts": {
+        "attachedFiles": "Файлы",
+        "filesAttached": "файлов прикреплено",
+        "editButton": "Изменить",
+        "deleteButton": "Удалить",
+        "addNewOne": "Добавить пост",
+        "attachFiles": "Прикрепить файлы",
+        "materialType": "Материал",
+        "homeworkType": "Домашнее задание",
+        "updateText": "Обновить",
+        "createText": "Add",
+        "createSuccess": "Пост добавлен",
+        "attachmentDownloadError": "Не удалось скачать файл",
+        "attachmentAdded": "Вложения добавлены"
+    },
     "recovery": {
         "title": "Password recovery",
         "description": "Enter your E-Mail. A link for password recovery will be sent to it.",
