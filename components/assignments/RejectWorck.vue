@@ -45,7 +45,7 @@ export default {
     InputNumber,Textarea
   },
   props: {
-    currentAssigment: Object
+    currentAssignment: Object
   },
   data() {
     return {
@@ -57,7 +57,7 @@ export default {
       reassignHomework: 'assignments/requestChanges'
     }),
     async submitAssignment() {
-      await this.reassignHomework({assignmentId: this.currentAssigment.id, requestBody: {comment: this.commentValue}})
+      await this.reassignHomework({assignmentId: this.currentAssignment.id, requestBody: {comment: this.commentValue}})
     },
   },
   
