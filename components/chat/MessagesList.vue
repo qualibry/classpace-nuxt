@@ -1,6 +1,7 @@
 <template>
-  <div  class="message-wrapper" ref="messageWrapper">
-    <Button @click="loadMessages" v-if="dialog.messages_count > diaogMessages.length" class="mb-2 m-auto">{{$t('messages.showMore')}}</Button>
+  <div class="message-wrapper" ref="messageWrapper">
+    <Button @click="loadMessages" v-if="dialog.messages_count > diaogMessages.length"
+      class="mb-2 m-auto">{{ $t('messages.showMore') }}</Button>
     <MessageBox v-for="message, index in diaogMessages" :key="index" :message="message" />
   </div>
 </template>
@@ -16,46 +17,36 @@ export default {
   },
   data() {
     return {
-      scrollFromTop: this.$refs.messageWrapper?.scrollTop,
+      scrollHeightOld: null
     }
   },
   methods: {
     async loadMessages() {
-      await this.$store.dispatch('chat/loadMessages', {offset: this.diaogMessages.length, limit: 15, dialog_id: this.$route.params.dialogId})
+      this.scrollHeightOld = this.$refs.messageWrapper.scrollHeight
+      await this.$store.dispatch('chat/loadMessages', { offset: this.diaogMessages.length, limit: 15, dialog_id: this.$route.params.dialogId })
+      this.$refs.messageWrapper.scrollTop = this.$refs.messageWrapper.scrollHeight - this.scrollHeightOld
     }
   },
-  mounted(){
+  mounted() {
     this.$refs.messageWrapper.style.opacity = 0
-    //setInterval(() => {console.log(this.$refs.messageWrapper?.scrollTop)}, 500)
+    setTimeout(() => {
+      this.$refs.messageWrapper.style.opacity = 1
+    }, 100)
   },
   computed: {
     ...mapGetters({
-        diaogMessages: 'chat/diaogMessages',
-        dialog: 'chat/dialog',
-        errors: 'chat/diaogMessages'
-      })
-    
-    // scrollFromTop() {
-    //   return this.$refs.messageWrapper?.scrollTop
-    // }
+      diaogMessages: 'chat/diaogMessages',
+      dialog: 'chat/dialog',
+      errors: 'chat/diaogMessages'
+    }),
   },
   watch: {
     async diaogMessages() {
-      await setTimeout( () => {
-        this.$refs.messageWrapper.scrollTop = this.$refs.messageWrapper.scrollHeight
+      await setTimeout(() => {
+        this.$store.commit('chat/SET_SCROOLL_FROM_TOP', this.$refs.messageWrapper.scrollHeight)
       })
-      setTimeout( () => {
-        this.$refs.messageWrapper.style.opacity = 1
-      }, 100)
     },
-    scrollFromTop() {
-      if(this.$refs.messageWrapper?.scrollTop === 0) {
-        console.log('Мы наверху')
-      }
-      console.log('Мы наверху')
-    }
   },
-  
 }
 </script>
 
@@ -76,10 +67,12 @@ export default {
 .message-wrapper::-webkit-scrollbar {
   width: 7px;
 }
+
 .message-wrapper::-webkit-scrollbar-track {
   background: rgb(231, 231, 231);
   border-radius: 20px;
 }
+
 .message-wrapper::-webkit-scrollbar-thumb {
   background-color: #4F46E5;
   border-radius: 20px;

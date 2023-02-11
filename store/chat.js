@@ -10,6 +10,7 @@ export const state = () => ({
     errors: {},
     current: null,
     dialog: {},
+    scrollFromTop: 0
 })
 
 export const getters = {
@@ -33,6 +34,9 @@ export const getters = {
     },
     errors(state) {
       return state.errors
+    },
+    scrollFromTop(state) {
+      return state.scrollFromTop
     }
 }
 
@@ -57,6 +61,9 @@ export const mutations = {
     },
     SET_ERRORS(state, items) {
         state.errors = items
+    },
+    SET_SCROOLL_FROM_TOP(state, value) {
+      state.scrollFromTop = value
     },
 }
 
@@ -132,7 +139,6 @@ export const actions = {
             request.headers.Authorization = `Bearer ${accessToken}`
           },
         })
-        console.log(response.body)
       commit('UNSHIFT_DIALOG_MESSAGES', response.body)
       //commit('SET_ERRORS', {})
     } catch (e) {

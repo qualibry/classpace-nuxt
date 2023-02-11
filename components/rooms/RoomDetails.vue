@@ -6,7 +6,9 @@
                 <Button icon="pi pi-arrow-left" class="p-button-rounded p-button-text p-button-plain mr-2" />
             </NuxtLink>
             <h2 class="my-0">{{ $t('rooms.roomName') }}: {{ room.name }}</h2>
-            <Button v-if="currentParticipation.is_moderator" type="button" label="Room manage" class="ml-auto" @click="toggleManageRoom" aria-haspopup="true" aria-controls="overlay_menu" />
+            <Button v-if="currentParticipation.is_moderator" type="button" :label="$t('rooms.roomManage')" 
+                class="ml-auto" @click="toggleManageRoom" aria-haspopup="true" aria-controls="overlay_menu"
+            />
             <Menu v-if="currentParticipation.is_moderator" id="overlay_menu" ref="menu" :model="items" :popup="true" />
         </div>
         <div class="grid">
@@ -32,7 +34,7 @@
                         <div class="flex align-items-center">
                             <h3>{{ $t('rooms.materials') }}</h3>
                             <NuxtLink v-if="currentParticipation.can_manage_posts" :to="'/rooms/add-post/' + room.id + '?type=material'">
-                                <Button icon="pi pi-plus" class="p-button-rounded p-button-text p-button-sm ml-2" v-tooltip.top="'Add materials'" />
+                                <Button icon="pi pi-plus" class="p-button-rounded p-button-text p-button-sm ml-2" v-tooltip.top="$t('rooms.addMaterials')" />
                             </NuxtLink>
                         </div>
                         <PostList :type="'material'" />
@@ -41,7 +43,7 @@
                         <div class="flex align-items-center">
                             <h3>{{ $t('rooms.homeworks') }}</h3>
                             <NuxtLink v-if="currentParticipation.can_manage_posts" :to="'/rooms/add-post/' + room.id + '?type=homework'">
-                                <Button icon="pi pi-plus" class="p-button-rounded p-button-text p-button-sm ml-2" v-tooltip.top="'Add homework'" />
+                                <Button icon="pi pi-plus" class="p-button-rounded p-button-text p-button-sm ml-2" v-tooltip.top="$t('rooms.addHomework')" />
                             </NuxtLink>
                         </div>
                         <PostList :type="'homework'" />
@@ -73,23 +75,26 @@
         components: {
             Button, Divider, InputText, Participants, Menu, ConfirmDialog, PostList
         },
+        mounted() {
+        },
         computed: {
             ...mapGetters({
                 room: 'rooms/item',
                 currentUser: 'users/currentUser',
                 currentParticipation: 'participants/current',
+                locale: 'locale/locale'
             }),
             joinLink() {
                 return window.location.host + '/rooms/join/' + this.room.join_slug
             }
         },
-
-        data () {
-            return {
-                items: [
-                    {
+        watch: {
+            locale(newV){
+                if (newV == 'en') {
+                this.items[0] = {
                         label: 'Room manage',
-                        items: [{
+                        items: [
+                        {
                             label: 'Edit',
                             icon: 'pi pi-pencil',
                             command: () => {
@@ -97,7 +102,7 @@
                             }
                         },
                         {
-                            label: 'Delete',
+                            label:'Delete', //this.locale == 'en'?  'Delete' : 'Удалить',
                             icon: 'pi pi-times',
                             command: () => {
                                 this.$confirm.require({
@@ -112,7 +117,98 @@
                             }
                         }
                     ]}
-                ]
+            }
+            else{
+                this.items[0] = {
+                        label: 'Управление комнатой',
+                        items: [
+                        {
+                            label: 'Редактировать',
+                            icon: 'pi pi-pencil',
+                            command: () => {
+                                this.$router.push({ name: 'rooms.edit', params: { id: this.room.id } })
+                            }
+                        },
+                        {
+                            label:'Удалить', //this.locale == 'en'?  'Delete' : 'Удалить',
+                            icon: 'pi pi-times',
+                            command: () => {
+                                this.$confirm.require({
+                                    header: 'Вы уверены?',
+                                    message: 'Вы действительно хотите удалить комнату?',
+                                    icon: 'pi pi-exclamation-triangle',
+                                    accept: () => {
+                                        this.deleteRoomHelper()
+                                    },
+                                    reject: () => {}
+                                });
+                            }
+                        }
+                    ]}
+            }
+            }
+        },
+        beforeMount() {
+            if (this.locale == 'en') {
+                this.items[0] = {
+                    label: 'Room manage',
+                    items: [
+                    {
+                        label: 'Edit',
+                        icon: 'pi pi-pencil',
+                        command: () => {
+                            this.$router.push({ name: 'rooms.edit', params: { id: this.room.id } })
+                        }
+                    },
+                    {
+                        label:'Delete', //this.locale == 'en'?  'Delete' : 'Удалить',
+                        icon: 'pi pi-times',
+                        command: () => {
+                            this.$confirm.require({
+                                header: 'Confirm the action',
+                                message: 'Do you really want to delete a room?',
+                                icon: 'pi pi-exclamation-triangle',
+                                accept: () => {
+                                    this.deleteRoomHelper()
+                                },
+                                reject: () => {}
+                            });
+                        }
+                    }
+                ]}
+            }
+            else{
+                this.items[0] = {
+                    label: 'Управление комнатой',
+                    items: [
+                    {
+                        label: 'Редактировать',
+                        icon: 'pi pi-pencil',
+                        command: () => {
+                            this.$router.push({ name: 'rooms.edit', params: { id: this.room.id } })
+                        }
+                    },
+                    {
+                        label:'Удалить', //this.locale == 'en'?  'Delete' : 'Удалить',
+                        icon: 'pi pi-times',
+                        command: () => {
+                            this.$confirm.require({
+                                header: 'Вы уверены?',
+                                message: 'Вы действительно хотите удалить комнату?',
+                                icon: 'pi pi-exclamation-triangle',
+                                accept: () => {
+                                    this.deleteRoomHelper()
+                                },
+                                reject: () => {}
+                            });
+                        }
+                    }
+                ]}
+            }
+        },
+        data () {
+            return {
+                items: []
             }
         },
 
@@ -142,8 +238,8 @@
 
                     this.$toast.add({
                         severity:'success',
-                        summary:'Success',
-                        detail:'Link copied!',
+                        summary: this.locale == 'en'? 'Success' : 'Успех',
+                        detail: this.locale == 'en'? 'Link copied!' : 'Ссылка скопирована',
                         life: 3000
                     });
                 } catch(e) {

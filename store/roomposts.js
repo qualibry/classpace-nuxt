@@ -64,7 +64,8 @@ export const actions = {
             })
             commit('SET_ITEMS', response.body.items)
         } catch (e) {
-            console.error(e.response)
+            await console.error(e.response)
+            throw e.response
         }
     },
     async delete({ dispatch }, roomPost) {

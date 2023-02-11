@@ -16,11 +16,11 @@
                     />
                 </label>
                 <div class="mb-3">
-                    <InputText v-model="form.title" placeholder="Title of post" class="block w-full" />
+                    <InputText v-model="form.title" :placeholder="$t('posts.titlePlaceholderCreate')" class="block w-full" />
                     <span class="text-sm text-red-400" v-if="errors.title">{{ errors.title }}</span>
                 </div>
-                <InputText v-model="form.description" placeholder="Description of post" class="block w-full mb-3" />
-                <Textarea v-model="form.text" placeholder="Text of room" autoresize="true" class="block w-full mb-3" rows="6" />
+                <InputText v-model="form.description" :placeholder="$t('posts.descriptionPlaceholderCreate')" class="block w-full mb-3" />
+                <Textarea v-model="form.text" :placeholder="$t('posts.textPlaceholderCreate')" autoresize="true" class="block w-full mb-3" rows="6" />
 
                 <Divider align="center" type="dashed" class="text-sm">
                     <b>{{ $t('posts.attachFiles') }}</b>

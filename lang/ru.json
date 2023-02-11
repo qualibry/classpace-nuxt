@@ -14,7 +14,14 @@
         "roomName": "Название курса",
         "membersInfo": "Участники",
         "homeworks": "Домашние задания",
-        "materials": "Учебные материалы"
+        "materials": "Учебные материалы",
+        "addMaterials": "Добавить материал",
+        "addHomework": "Добавить домашнюю работу",
+        "roomManage": "Управление комнатой",
+        "messageNoRoom": "На данный момент вы не являетесь участником ни одной из комнат. Присоединяйтесь или создайте свою собственную комнату!"
+    },
+    "chat":{
+        "chatList": "Список ваших диалогов"
     },
     "sidebar": {
         "group-title": {
@@ -122,6 +129,9 @@
         "createText": "Добавить",
         "createSuccess": "Пост добавлен",
         "attachmentDownloadError": "Не удалось скачать файл",
-        "attachmentAdded": "Вложения добавлены"
+        "attachmentAdded": "Вложения добавлены",
+        "titlePlaceholderCreate": "Заголовок поста", 
+        "descriptionPlaceholderCreate": "Заголовок поста",
+        "textPlaceholderCreate": "Текст поста"
     }
 }

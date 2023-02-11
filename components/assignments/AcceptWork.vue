@@ -68,8 +68,7 @@ export default {
       rateHomework: 'assignments/rateHomework'
     }),
     async submitAssignment() {
-      console.log(this.mark)
-      await this.rateHomework({ assignmentId: this.currentAssigment.id, requestBody:{rate: this.mark, comment: this.comment}})
+      await this.rateHomework({ assignmentId: this.currentAssignment.id, requestBody:{rate: this.mark, comment: this.comment}})
     }
   },
   

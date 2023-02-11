@@ -5,7 +5,7 @@
             <NuxtLink to="/rooms">
                 <Button icon="pi pi-arrow-left" class="p-button-rounded p-button-text p-button-plain mr-2" />
             </NuxtLink>
-            <h2 class="my-0">Create new room</h2>
+            <h2 class="my-0"> {{$t('rooms.create')}}</h2>
         </div>
         <div class="xl:col-4 col-12">
             <div class="mb-3">

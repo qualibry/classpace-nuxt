@@ -2,7 +2,7 @@
   <div>
     <header class="border-round-lg min-h-4rem flex box-sadow ">
       <div>
-        <h2 class="mt-0">List of your dialogs</h2>
+        <h2 class="mt-0">{{ $t('chat.chatList') }}</h2>
       </div>
     </header>
     <main>

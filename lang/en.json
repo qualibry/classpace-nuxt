@@ -3,7 +3,22 @@
     "rooms": {
         "list": "List of your rooms",
         "description": "A list of rooms available to you is displayed here. You can also create your own room.",
-        "create": "Create new room"
+        "create": "Create new room",
+        "roomManage": "Manage room",
+        "roomName": "Course name",
+        "roomCreator": "Creator",
+        "roomDescription": "Description",
+        "linkToJoin": "Link to join",
+        "copyToClipboard": "Copy to clipboard",
+        "addMaterials": "Add material",
+        "addHomework": "Add homework",
+        "membersInfo": "Members info",
+        "homeworks": "Homeworks",
+        "materials": "Educational materials",
+        "messageNoRoom": "At the moment you are not a member of any rooms. Join or create your own room!"
+    },
+    "chat":{
+        "chatList": "List of your dialogs"
     },
     "sidebar": {
         "group-title": {
@@ -62,6 +77,36 @@
         },
         "eula": "Accept EULA",
         "button": "Sign up for free"
+    },
+    "posts": {
+        "attachedFiles": "Файлы",
+        "filesAttached": "файлов прикреплено",
+        "editButton": "Изменить",
+        "deleteButton": "Удалить",
+        "addNewOne": "Добавить пост",
+        "attachFiles": "Прикрепить файлы",
+        "materialType": "Материал",
+        "homeworkType": "Домашнее задание",
+        "updateText": "Обновить",
+        "createText": "Add",
+        "createSuccess": "Пост добавлен",
+        "attachmentDownloadError": "Не удалось скачать файл",
+        "attachmentAdded": "Вложения добавлены"
+    },
+    "homeworks": {
+        "assignedHomeworksCount": "Submitted works",
+        "description": "description homework",
+        "showAssignment": "Show Assignment",
+        "noAssignments": "At the moment there are no completed works 😞",
+        "assignedSuccess": "The work has been successfully completed!",
+        "encourageMessage": "Continue to please the teacher!",
+        "assignAttach": "download",
+        "assignDownload": "download",
+        "unassignedStatus": "not passed",
+        "status": "Status",
+        "assignmentTitle": "Submitted work",
+        "attachmentNotUploadedError": "This file has not been uploaded",
+        "studentColumn": "Student's full name"
     },
     "recovery": {
         "title": "Password recovery",
