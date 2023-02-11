@@ -11,6 +11,9 @@
                 <div v-if="error.statusCode === 404" class="block mb-4">
                     This page could not be found :(
                 </div>
+                <div v-if="error.statusCode === 403" class="block mb-4">
+                    Forbidden :(
+                </div>
                 <div v-else class="block mb-4">
                     {{ error.message }}
                 </div>
