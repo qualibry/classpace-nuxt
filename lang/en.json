@@ -14,7 +14,11 @@
         "addHomework": "Add homework",
         "membersInfo": "Members info",
         "homeworks": "Homeworks",
-        "materials": "Educational materials"
+        "materials": "Educational materials",
+        "messageNoRoom": "At the moment you are not a member of any rooms. Join or create your own room!"
+    },
+    "chat":{
+        "chatList": "List of your dialogs"
     },
     "sidebar": {
         "group-title": {

@@ -68,7 +68,7 @@
                 </div>
                 <div v-else>
                     <div class="col-12">
-                        <Message :closable="false" severity="warn">At the moment you are not a member of any rooms. Join or create your own room!</Message>
+                        <Message :closable="false" severity="warn">{{ $t('rooms.messageNoRoom') }}</Message>
                     </div>
                 </div>
             </template>
