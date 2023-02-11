@@ -14,7 +14,10 @@
         "roomName": "Название курса",
         "membersInfo": "Участники",
         "homeworks": "Домашние задания",
-        "materials": "Учебные материалы"
+        "materials": "Учебные материалы",
+        "addMaterials": "Добавить материал",
+        "addHomework": "Добавить домашнюю работу",
+        "roomManage": "Управление комнатой"
     },
     "sidebar": {
         "group-title": {
