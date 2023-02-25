@@ -3,7 +3,7 @@ name: Classpace frontend CI/CD
 on:
   push:
     branches:
-      - 'main'
+      - 'master'
       - 'release/**'
   pull_request:
     branches:
