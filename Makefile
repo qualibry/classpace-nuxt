@@ -1,8 +1,6 @@
 DC=docker-compose
-STORAGES=docker-compose/storage.yml
 PRODFILE=docker-compose.yaml
-CALL_CONTAINER_IT=docker exec -it classroom-notifications
-RUN_TEST=poetry run pytest
+
 
 .PHONY: network
 network:
