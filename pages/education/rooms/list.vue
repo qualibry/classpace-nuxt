@@ -51,7 +51,20 @@
             <template v-else>
                 <div v-if="rooms.total > 0">
                     <div class="room-card-container">
-                      <NuxtLink :to="'/rooms/show/' + room.room.id" v-for="room in rooms.items" class="xl:col-4 col-12" :key="room.id">
+                      <a
+                        @click="$router.push(
+                          {
+                            name: 'rooms.show',
+                            query: {
+                              limit: 50,
+                              offset: 0,
+                            },
+                            params: {id: room.room.id}
+                          })"
+                        v-for="room in rooms.items"
+                        class="xl:col-4 col-12 roomContainer"
+                        :key="room.id"
+                      >
                           <div class="room-card bg-white border-solid border-1 p-3 border-round-lg border-300">
                               <div class="flex align-items-center mb-2">
                                   <h3 class="m-0 white-space-nowrap overflow-hidden text-overflow-ellipsis">{{ room.room.name }}</h3>
@@ -62,7 +75,7 @@
                               <p class="room-description">{{ room.room.description }}</p>
                               <span class="text-xs">{{ new Date(room.room.created_at) | dateFormat('YYYY.MM.DD') }}</span>
                           </div>
-                      </NuxtLink>
+                      </a>
                     </div>
                     <Paginator v-if="rooms.total > rows" :first="startItem" :rows="rows" :totalRecords="this.rooms.total" class="pagination" @page="onPage($event)"></Paginator>
                 </div>
@@ -160,5 +173,9 @@
 .el-for-scroll {
   height: 50px;
   overflow: auto;
+}
+
+.roomContainer {
+  cursor: pointer;
 }
 </style>

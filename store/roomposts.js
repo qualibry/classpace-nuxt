@@ -52,14 +52,22 @@ export const actions = {
             commit('SET_ERRORS', e.response.body.detail)
         }
     },
-    async fetch({ commit }, roomId) {
+    async fetch({ commit }, {roomId, search, ordering, limit, offset}) {
         const client = await apiClient
         const accessToken = this.$cookies.get('token')
         
         try {
-            const response = await client.apis.roomPost.getRoomPosts({room_id: roomId}, {
-                requestInterceptor: (request) => {
-                    request.headers.Authorization = `Bearer ${accessToken}`
+            const response = await client.apis.roomPost.getRoomPosts(
+                {
+                    room_id: roomId,
+                    search: search,
+                    ordering: ordering,
+                    limit: limit,
+                    offset: offset,
+                },
+                {
+                    requestInterceptor: (request) => {
+                        request.headers.Authorization = `Bearer ${accessToken}`
                 },
             })
             commit('SET_ITEMS', response.body.items)
@@ -68,7 +76,7 @@ export const actions = {
             throw e.response
         }
     },
-    async delete({ dispatch }, roomPost) {
+    async delete({ getters, commit }, roomPost) {
         const client = await apiClient
         const accessToken = this.$cookies.get('token')
         
@@ -80,7 +88,8 @@ export const actions = {
                     request.headers.Authorization = `Bearer ${accessToken}`
                 },
             })
-            dispatch('fetch', roomPost.room_id)
+            console.log(getters.items)
+            commit('SET_ITEMS', getters.items.filter(item => item.id != roomPost.id))
         } catch (e) {
             console.error(e)
         }

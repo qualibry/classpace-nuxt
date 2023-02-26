@@ -10,20 +10,20 @@
                 <NuxtLink to="/rooms">
                     <Button icon="pi pi-arrow-left" class="p-button-rounded p-button-text p-button-plain mr-2" />
                 </NuxtLink>
-                <h2 class="my-0">Edit room</h2>
+                <h2 class="my-0">{{ $t('rooms.updateHeader') }}</h2>
             </div>
             <span class="text-sm mb-3 block">
-                Last update: {{ room.updated_at }}
+                {{ $t('rooms.lastUpdated') }}: {{ room.updated_at }}
             </span>
             <div class="grid">
                 <div class="col-12 xl:col-4">
-                    <label for="first_name" class="mb-1 block">Name of room</label>
+                    <label for="first_name" class="mb-1 block">{{ $t('rooms.updateName') }}</label>
                     <InputText id="first_name" v-model="form.name" class="block w-full mb-4" placeholder="Enter a name of the room..." />
 
-                    <label for="first_name" class="mb-1 block">Description of room</label>
+                    <label for="first_name" class="mb-1 block">{{ $t('rooms.updateDescription') }}</label>
                     <Textarea v-model="form.description" placeholder="Enter a description of the room..." :autoResize="true" rows="6" class="block w-full mb-3" />
 
-                    <Button @click.prevent="updateRoomById()">Update the room</Button>
+                    <Button @click.prevent="updateRoomById()">{{ $t('rooms.update') }}</Button>
                 </div>
             </div>
         </template>

@@ -24,7 +24,7 @@
                             <div class="mb-3">
                                 <span class="p-input-icon-left d-block w-full">
                                     <i class="pi pi-phone" />
-                                    <InputText type="text" v-model="form.phone_number" :placeholder="$t('registration.placeholders.phone')" class="w-full" />
+                                    <InputMask :unmask="true" mask="+7-999-999-99-99" type="text" v-model="form.phone_number" :placeholder="$t('registration.placeholders.phone')" class="w-full" />
                                 </span>
                                 <span v-if="errors.phone_number" class="error text-red-400">{{ errors.phone_number }}</span>
                             </div>
@@ -88,61 +88,64 @@
 </template>
 
 <script>
-    import Card from 'primevue/card';
-    import InputText from 'primevue/inputtext';
-    import Button from 'primevue/button';
-    import Divider from 'primevue/divider';
-    import Checkbox from 'primevue/checkbox';
-    import { mapActions, mapGetters } from 'vuex';
+import Card from 'primevue/card';
+import InputText from 'primevue/inputtext';
+import Button from 'primevue/button';
+import Divider from 'primevue/divider';
+import Checkbox from 'primevue/checkbox';
+import { mapActions, mapGetters } from 'vuex';
+import InputMask from 'primevue/inputmask';
 
-    export default {
-        components: {
-            Card, InputText, Button, Divider, Checkbox
-        },
 
-        layout: 'authentication',
+export default {
+    components: {
+        Card, InputText, Button, Divider, Checkbox, InputMask
+    },
 
-        middleware: 'guest',
+    layout: 'authentication',
 
-        data () {
-            return {
-                form: {
-                    email: '',
-                    phone_number: '',
-                    first_name: '',
-                    last_name: '',
-                    middle_name: '',
-                    password: '',
-                    repeat_password: '',
-                    accept_eula: false
-                }
+    middleware: 'guest',
+
+    data () {
+        return {
+            form: {
+                email: '',
+                phone_number: '+7',
+                first_name: '',
+                last_name: '',
+                middle_name: '',
+                password: '',
+                repeat_password: '',
+                accept_eula: false
             }
-        },
+        }
+    },
 
-        computed: {
-            ...mapGetters({
-                errors: 'users/registrationErrors'
-            })
-        },
+    computed: {
+        ...mapGetters({
+            errors: 'users/registrationErrors'
+        })
+    },
 
-        methods: {
-            ...mapActions({
-                registerUser: 'users/registerUser',
-            }),
+    methods: {
+        ...mapActions({
+            registerUser: 'users/registerUser',
+        }),
+        
+        async registrationUser() {
+            this.form.phone_number = `+7${this.form.phone_number}`
             
-            async registrationUser() {
-                await this.registerUser(this.form)
-                console.log(this.form)
-                if(Object.keys(this.errors).length === 0) {
-                    this.$router.push({ name: 'login' })
-                    this.$toast.add({
-                        severity: 'success',
-                        summary: this.$t('registration.successTest'),
-                        detail: this.$t('registration.checkoutEmailAfterRegistration'),
-                        life: 12000
-                    })
-                }
+            await this.registerUser(this.form)
+            if(Object.keys(this.errors).length === 0) {
+                this.$router.push({ name: 'login' })
+                this.$toast.add({
+                    severity: 'success',
+                    summary: this.$t('registration.successTest'),
+                    detail: this.$t('registration.checkoutEmailAfterRegistration'),
+                    life: 12000
+                })
             }
         }
     }
+}
 </script>

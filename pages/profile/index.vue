@@ -1,7 +1,7 @@
 <template>
     <div class="user-profile">
         <template v-if="!loading">
-            <h2 class="mt-0">{{$t('profileInfo')}}</h2>
+            <h2 class="mt-0">{{$t('profile.info')}}</h2>
             <div class="grid">
                 <div class="col-12 xl:col-8">
                     <div class="flex align-items-center mb-6">
@@ -17,8 +17,8 @@
                             <span>{{ currentUser.email }}</span>
                         </div>
                         <div class="ml-8">
-                            <span class="text-sm block mb-1">Registration date: {{ currentUser.created_at }}</span>
-                            <span class="text-sm block">Last update: {{ currentUser.updated_at }}</span>
+                            <span class="text-sm block mb-1">{{ $t('profile.registrationDate') }}: {{ currentUser.created_at }}</span>
+                            <span class="text-sm block">{{ $t('profile.updateDate') }}: {{ currentUser.updated_at }}</span>
                         </div>
                     </div>
                     <h4>Edit profile:</h4>

@@ -1,5 +1,10 @@
 {
     "test": "Тестовое сообщение",
+    "profile": {
+        "info": "Ваш профиль",
+        "registrationDate": "Дата регистрации",
+        "updateDate": "Последнее обновление"
+    },
     "basics": {
         "successPop": "Успешно"
     },
@@ -18,7 +23,16 @@
         "addMaterials": "Добавить материал",
         "addHomework": "Добавить домашнюю работу",
         "roomManage": "Управление комнатой",
-        "messageNoRoom": "На данный момент вы не являетесь участником ни одной из комнат. Присоединяйтесь или создайте свою собственную комнату!"
+        "messageNoRoom": "На данный момент вы не состоите ни в одном классе. Создайте свой или присоединитесь к уже существующим",
+        "update": "Обновить",
+        "edit": "Редактировать курс",
+        "updateName": "Название курса",
+        "updateDescription": "Описание курса",
+        "lastUpdated": "Дата последнео обновления",
+        "updateHeader": "Редактировать курс",
+        "searchPost": "Поиск по названию",
+        "orderPost": "Сортировать по",
+        "searchPlaceholder": "Искать по названию материала"
     },
     "chat":{
         "chatList": "Список ваших диалогов"
@@ -131,7 +145,11 @@
         "attachmentDownloadError": "Не удалось скачать файл",
         "attachmentAdded": "Вложения добавлены",
         "titlePlaceholderCreate": "Заголовок поста", 
-        "descriptionPlaceholderCreate": "Заголовок поста",
+        "descriptionPlaceholderCreate": "Краткое описание поста",
         "textPlaceholderCreate": "Текст поста"
+    },
+    "ordering": {
+        "creationDateAsc": "Дата создания",
+        "title": "Название"
     }
 }

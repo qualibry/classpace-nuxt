@@ -4,20 +4,25 @@
         <Avatar :image="member.user.profile_picture_path" class="mr-3" size="large" shape="circle" />
         <div>
           <h4 class="mt-0 mb-1">{{ member.user.first_name }} {{ member.user.last_name }}</h4>
-          <span>{{ member.user.email }}</span>
         </div>
-        <i @click="goToChat(member)" class="pi pi-envelope align-self-start cursor-pointer ml-1" style="font-size: 1rem"></i>
+        <Button
+          @click="goToChat(member)"
+          icon="pi pi-pencil"
+          class="p-button-sm p-button-text"
+          v-show="member.user.id !== currentUser.id"
+        />
     </div>
   </div>
 </template>
 
 <script>
-    import { mapGetters, mapActions } from 'vuex';
-    import Avatar from 'primevue/avatar';
+  import { mapGetters, mapActions } from 'vuex';
+  import Avatar from 'primevue/avatar';
+  import Button from 'primevue/button';
 
   export default {
     components: {
-      Avatar
+      Avatar, Button
     },
 
     data () {
@@ -31,7 +36,7 @@
       }),
       async goToChat(member) {
         await this.createChat({
-          participants_ids:[member.user.id]
+          participants_ids: [member.user.id]
         })
         this.$toast.add({
           severity: 'success',
