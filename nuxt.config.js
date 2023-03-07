@@ -6,9 +6,17 @@ export default {
     ssr: true,
 
     head: {
-        title: 'ClassSpace',
+        title: 'bezpart',
         htmlAttrs: {
             lang: 'en'
+        },
+        head: {
+            script: [
+                {
+                    src: "https://vk.com/js/api/openapi.js?169",
+                    type: 'text/javascript',
+                },
+            ],
         },
         meta: [
             { charset: 'utf-8' },

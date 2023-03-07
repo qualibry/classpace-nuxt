@@ -39,6 +39,7 @@
                                 <Checkbox id="remember" v-model="form.remember" :binary="true" />
                                 <label for="remember">{{ $t('login.remember') }}</label>
                             </div>
+                            <OAuthComponent />
                             <Button
                                 @click.prevent="loginUser()"
                                 :loading="loading"
@@ -65,10 +66,12 @@
     import Divider from 'primevue/divider';
     import Checkbox from 'primevue/checkbox';
     import { mapActions, mapGetters } from 'vuex';
+    import OAuthComponent from '~/components/auth/OAuthComponent.vue'
 
     export default {
         components: {
-            Card, InputText, Button, Divider, Checkbox
+            Card, InputText, Button, Divider, Checkbox,
+            OAuthComponent,
         },
 
         layout: 'authentication',
@@ -109,7 +112,10 @@
             async loginUser() {
                 this.loading = true
 
-                await this.authenticateUser(this.form)
+                await this.authenticateUser({
+                    username: this.form.email,
+                    password: this.form.password,
+                })
 
                 if(!this.error) {
                     this.$router.push({ 'name': 'profile' })
