@@ -19,16 +19,6 @@
                                 </span>
                             </div>
                             <Divider align="center" type="dashed" class="text-sm">
-                                <b>{{ $t('login.dividers.or') }}</b>
-                            </Divider>
-                            <div>
-                                <span class="p-input-icon-left d-block w-full">
-                                    <i class="pi pi-phone" />
-                                    <InputText type="text" v-model="form.phone_number" :placeholder="$t('login.placeholders.phone')" class="w-full" />
-                                    <span v-if="errors.email" class="error text-red-400">{{ errors.phone }}</span>
-                                </span>
-                            </div>
-                            <Divider align="center" type="dashed" class="text-sm">
                                 <b>{{ $t('login.dividers.password') }}</b>
                             </Divider>
                             <span class="p-input-icon-left d-block w-full mb-0">
@@ -82,7 +72,6 @@
             return {
                 form: {
                     email: '',
-                    phone_number: '',
                     password: '',
                     remember: false
                 },
@@ -97,7 +86,7 @@
                 authenticationToken: 'users/authenticationToken'
             }),
             allowLogin() {
-                return (this.form.email || this.form.phone_number) && (this.form.password)
+                return this.form.email && (this.form.password)
             }
         },
 

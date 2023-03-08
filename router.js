@@ -8,6 +8,7 @@ const page = path => () => import(`~/pages/${path}`).then(m => m.default || m)
 const routes = [
     { path: '/', name: 'home', component: page('index.vue'),  meta: { requiresAuth: false } },
     { path: '/login', name: 'login', component: page('authentication/login.vue'),  meta: { requiresAuth: false } },
+    { path: '/oauth', name: 'oauth-login', component: page('authentication/Oauth.vue'),  meta: { requiresAuth: false } },
     { path: '/registration', name: 'registration', component: page('authentication/registration.vue'),  meta: { requiresAuth: false } },
     { path: '/recovery', name: 'recovery', component: page('authentication/recovery.vue'), meta: { requiresAuth: false } },
     { path: '/reset-password/:token', name: 'reset-password', component: page('authentication/ResetPassword.vue'), meta: { requiresAuth: false } },

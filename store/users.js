@@ -51,6 +51,7 @@ export const mutations = {
         state.token = null
     },
     SET_ACCESS_TOKEN(state, item) {
+        this.$cookies.set('token', item)
         state.token = item
     }
 }
@@ -72,6 +73,30 @@ export const actions = {
         }
     },
 
+    async setAccessToken({ commit }, { token }) {
+        this.$cookies.set('token', token)
+        commit('SET_ACCESS_TOKEN', token)
+        commit('SET_LOGIN_ERROR', undefined)
+    },
+
+    async authenticateWithVK({ commit }, { code }) {
+        const client = await apiClient
+
+        try {
+            var response = await client.apis.user.OAuthVK({code: code}, {
+                requestInterceptor: request => {
+                    request.headers['accept-language'] = Cookies.get('locale')
+                }, 
+            })
+            this.$cookies.set('token', response.body.access_token)
+            commit('SET_ACCESS_TOKEN', response.body.access_token)
+            commit('SET_LOGIN_ERROR', undefined)
+        } catch (e) {
+            console.error(e)
+            commit('SET_LOGIN_ERROR', e.response.body.detail)
+        }
+    },
+
     async authenticateUser({ commit }, requestBody) {
         const client = await apiClient
 
@@ -82,7 +107,6 @@ export const actions = {
                     request.headers['accept-language'] = Cookies.get('locale')
                 }, 
             })
-            this.$cookies.set('token', response.body.access_token)
             commit('SET_ACCESS_TOKEN', response.body.access_token)
             commit('SET_LOGIN_ERROR', undefined)
         } catch (e) {

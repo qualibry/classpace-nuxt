@@ -21,13 +21,6 @@
                                 </span>
                                 <span v-if="errors.email" class="error text-red-400">{{ errors.email }}</span>
                             </div>
-                            <div class="mb-3">
-                                <span class="p-input-icon-left d-block w-full">
-                                    <i class="pi pi-phone" />
-                                    <InputMask :unmask="true" mask="+7-999-999-99-99" type="text" v-model="form.phone_number" :placeholder="$t('registration.placeholders.phone')" class="w-full" />
-                                </span>
-                                <span v-if="errors.phone_number" class="error text-red-400">{{ errors.phone_number }}</span>
-                            </div>
                             <Divider align="center" type="dashed" class="text-sm">
                                 <b>{{ $t('registration.dividers.personal') }}</b>
                             </Divider>
@@ -110,7 +103,6 @@ export default {
         return {
             form: {
                 email: '',
-                phone_number: '+7',
                 first_name: '',
                 last_name: '',
                 middle_name: '',
@@ -133,8 +125,6 @@ export default {
         }),
         
         async registrationUser() {
-            this.form.phone_number = `+7${this.form.phone_number}`
-            
             await this.registerUser(this.form)
             if(Object.keys(this.errors).length === 0) {
                 this.$router.push({ name: 'login' })

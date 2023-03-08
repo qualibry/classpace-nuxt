@@ -35,6 +35,7 @@
                     <Divider align="left" type="dashed">
                         Credentials
                     </Divider>
+                    {{ form }}
                     <label for="first_name" class="mb-1 block">Password</label>
                     <InputText id="first_name" v-model="form.password" class="block w-full mb-4" />
                     <label for="first_name" class="mb-1 block">Repeat password</label>
@@ -76,7 +77,6 @@ export default {
                 last_name: '',
                 middleName: '',
                 confirm_password: '',
-                phone_number: '',
                 email: '',
                 password: '',
                 repeat_password: '',
@@ -129,7 +129,7 @@ export default {
                 this.loading = false
         }, 100)
 
-        this.form = Object.assign({}, this.currentUser)
+        this.form = Object.assign(this.form, this.currentUser)
     }
 }
 </script>

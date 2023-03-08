@@ -5,7 +5,7 @@
             <NuxtLink to="/rooms">
                 <Button icon="pi pi-arrow-left" class="p-button-rounded p-button-text p-button-plain mr-2" />
             </NuxtLink>
-            <h2 class="my-0">{{ $t('rooms.roomName') }}: {{ room.name }}</h2>
+            <h2 class="my-0">{{ room.name }}</h2>
             <Button v-if="currentParticipation.is_moderator" type="button" :label="$t('rooms.roomManage')" 
                 class="ml-auto" @click="toggleManageRoom" aria-haspopup="true" aria-controls="overlay_menu"
             />

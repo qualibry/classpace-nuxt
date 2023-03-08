@@ -57,9 +57,6 @@ export default {
             attachFiles: false,
         }
     },
-    async created() {
-        //await this.$store.commit('attachments/SET_ITEMS', this.assignment.attachments || [])
-    },
     computed: {
         ...mapGetters({
             'assignment': 'assignments/item',

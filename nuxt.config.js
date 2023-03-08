@@ -10,14 +10,6 @@ export default {
         htmlAttrs: {
             lang: 'en'
         },
-        head: {
-            script: [
-                {
-                    src: "https://vk.com/js/api/openapi.js?169",
-                    type: 'text/javascript',
-                },
-            ],
-        },
         meta: [
             { charset: 'utf-8' },
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
