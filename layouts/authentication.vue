@@ -8,18 +8,18 @@
 </template>
 
 <script>
-    import Toast from 'primevue/toast';
+import Toast from 'primevue/toast';
 
 
-    export default {
-        components: {
-            Toast,
-        },
-        name: "AuthLayout",
-        head: {
-            bodyAttrs: {
-                class: 'no-padding'
-            }
+export default {
+    components: {
+        Toast,
+    },
+    name: "AuthLayout",
+    head: {
+        bodyAttrs: {
+            class: 'no-padding'
         }
     }
+}
 </script>

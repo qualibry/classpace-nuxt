@@ -1,5 +1,6 @@
 <template>
     <div class="user-profile">
+        <Toast />
         <template v-if="!loading">
             <h2 class="mt-0">{{$t('profile.info')}}</h2>
             <div class="grid">
@@ -21,28 +22,27 @@
                             <span class="text-sm block">{{ $t('profile.updateDate') }}: {{ currentUser.updated_at }}</span>
                         </div>
                     </div>
-                    <h4>Edit profile:</h4>
+                    <h4>Обновить профиль:</h4>
                     <Divider align="left" type="dashed">
-                        Personal info
+                        Основные данные
                     </Divider>
-                    <label for="first_name" class="mb-1 block">First name</label>
+                    <label for="first_name" class="mb-1 block">Имя</label>
                     <InputText id="first_name" v-model="form.first_name" class="block w-full mb-4" />
-                    <label for="first_name" class="mb-1 block">Middle name</label>
+                    <label for="first_name" class="mb-1 block">Отчество (второе имя)</label>
                     <InputText id="first_name" v-model="form.middle_name" class="block w-full mb-4" />
-                    <label for="first_name" class="mb-1 block">Last name</label>
+                    <label for="first_name" class="mb-1 block">Фамилия</label>
                     <InputText id="first_name" v-model="form.last_name" class="block w-full mb-5" />
                     
                     <Divider align="left" type="dashed">
-                        Credentials
+                        Данные для входа
                     </Divider>
-                    {{ form }}
-                    <label for="first_name" class="mb-1 block">Password</label>
+                    <label for="first_name" class="mb-1 block">Новый пароль</label>
                     <InputText id="first_name" v-model="form.password" class="block w-full mb-4" />
-                    <label for="first_name" class="mb-1 block">Repeat password</label>
+                    <label for="first_name" class="mb-1 block">Повторите новый пароль</label>
                     <InputText id="first_name" v-model="form.repeat_password" class="block w-full mb-5" />
-                    <label for="first_name" class="mb-1 block">Confirm password</label>
+                    <label for="first_name" class="mb-1 block">Подтвердить пароль</label>
                     <InputText id="first_name" v-model="form.confirm_password" class="block w-full mb-5" />
-                    <Button @click.prevent="updateProfile">Update your profile</Button>
+                    <Button @click.prevent="updateUser">Обновить</Button>
                 </div>
             </div>
         </template>
@@ -62,13 +62,13 @@ import Divider from 'primevue/divider';
 import ProgressSpinner from 'primevue/progressspinner';
 import Button from 'primevue/button';
 import { getAuth, signInAnonymously } from 'firebase/auth'
-import { getToken } from '@firebase/messaging';
+import Toast from 'primevue/toast';
 
 
 export default {
     components: {
         Avatar, InputText, Divider,
-        ProgressSpinner, Button,
+        ProgressSpinner, Button, Toast,
     },
     data () {
         return {
@@ -95,12 +95,24 @@ export default {
             updateUserAvatar: 'users/updateAvatar',
             
         }),
-        async updateProfile() {
-            const requestBody = this.form
-            await this.updateUser(requestBody)
-        },
         async updateUser() {
-            await this.$store.dispatch('users/updateUser', this.form)
+            const response = await this.$store.dispatch('users/updateUser', this.form)
+            console.log(response)
+            
+            if(response.ok) {
+                this.$toast.add({
+                    severity: 'success',
+                    summary: 'Профиль успешно обновлён!',
+                    life: 5000
+                })
+            }
+            else {
+                this.$toast.add({
+                    severity: 'error',
+                    summary: 'Не удалось обновить профиль',
+                    life: 3000
+                })
+            }
         },
         activateInput() {
             document.getElementById('chooser_avatar').click()

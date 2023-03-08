@@ -5,7 +5,7 @@
         <Toast />
         <div class="container pt-4">
             <transition name="fade" mode="out-in" appear>
-              <Nuxt />
+                <Nuxt />
             </transition>
         </div>
     </div>

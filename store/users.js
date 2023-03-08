@@ -128,9 +128,10 @@ export const actions = {
     async updateUser({ commit }, requestBody) {
         const client = await apiClient
         const accessToken = this.$cookies.get('token')
+        let response = undefined
 
         try {
-            const response = await client.apis.user.updateCurrentUser({}, {
+            response = await client.apis.user.updateCurrentUser({}, {
                 requestInterceptor: (request) => {
                     request.headers.Authorization = `Bearer ${accessToken}`
                     request.headers['accept-language'] = Cookies.get('locale')
@@ -141,8 +142,11 @@ export const actions = {
             commit('SET_REGISTRATION_ERRORS', {})
         } catch (e) {
             console.error(e)
+            resposne = e.response
             commit('SET_REGISTRATION_ERRORS', e.response.body.detail)
         }
+
+        return response
     },
     async updateAvatar({ commit, state }, requestBody) {
         const client = await apiClient
