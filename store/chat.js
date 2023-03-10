@@ -101,6 +101,7 @@ export const actions = {
         },
         requestBody: requestBody
       })
+      console.log(response)
       commit('SET_LAST_MESSAGES', response.body)
       commit('SET_ERRORS', {})
 

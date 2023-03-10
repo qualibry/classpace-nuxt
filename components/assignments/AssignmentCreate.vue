@@ -8,12 +8,6 @@
                 >
                 </Badge>
             </h3>
-            <FileUpload
-                :customUpload="true"
-                @uploader="createAttachments"
-                v-model="this.attachments"
-                :multiple="true"
-            />
             <Button
                 label="Submit"
                 icon="pi pi-check"
@@ -28,7 +22,7 @@
                     <b>: {{ attachFiles ? $t('homeworks.assignAttach') : $t('homeworks.assignDownload') }}</b>
                 </h3>
                 <InputSwitch v-model="attachFiles" />
-                <AttachmentList :editable="attachFiles" />
+                <AttachmentList :editable="attachFiles" @update_files="(files) => {attachments = files} " />
             </div>
         </div>
     </div>
@@ -39,7 +33,6 @@
 import { mapGetters } from 'vuex'
 import AttachmentList from '@/components/attachments/AttachmentList.vue'
 import InputSwitch from 'primevue/inputswitch';
-import FileUpload from 'primevue/fileupload';
 import Badge from 'primevue/badge';
 import Button from 'primevue/button';
 import attachmentsCreate from '~/mixins/attachmentsCreate.js'
@@ -47,7 +40,7 @@ import attachmentsCreate from '~/mixins/attachmentsCreate.js'
 
 export default {
     components: {
-        AttachmentList, Badge, FileUpload,
+        AttachmentList, Badge,
         Button, InputSwitch,
     },
     mixins: [attachmentsCreate],

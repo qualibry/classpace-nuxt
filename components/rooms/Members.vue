@@ -24,12 +24,6 @@
     components: {
       Avatar, Button
     },
-
-    data () {
-      return {
-        loading: true
-      }
-    },
     methods: {
       ...mapActions({
         createChat: 'chat/createChat'
