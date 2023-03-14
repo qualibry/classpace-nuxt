@@ -77,11 +77,6 @@ export default {
             post: 'roomposts/item',
         }),
     },
-    mounted(){
-        console.log(this.$route)
-        console.log(this.$route.name === 'rooms.post.update')
-    },
-
     methods: {
         ...mapActions({
             create: 'roomposts/create',
@@ -89,7 +84,6 @@ export default {
         }),
         updateFiles(files){
             this.attachments = files
-            console.log(files)
         },
 
         back() {
