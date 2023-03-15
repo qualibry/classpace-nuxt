@@ -37,9 +37,9 @@ export const actions = {
     async create({ commit }, requestBody) {
         const client = await apiClient
         const accessToken = this.$cookies.get('token')
-        
+        let response = undefined
         try {
-            const response = await client.apis.roomPost.createRoomPost({}, {
+            response = await client.apis.roomPost.createRoomPost({}, {
                 requestInterceptor: (request) => {
                     request.headers.Authorization = `Bearer ${accessToken}`
                 },
@@ -50,7 +50,10 @@ export const actions = {
         } catch (e) {
             console.error(e.response)
             commit('SET_ERRORS', e.response.body.detail)
+            response = e.response
         }
+        console.log(response)
+        return response
     },
     async fetch({ commit }, {roomId, search, ordering, limit, offset}) {
         const client = await apiClient

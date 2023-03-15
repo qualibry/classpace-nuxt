@@ -22,17 +22,12 @@
                 <InputText v-model="form.description" :placeholder="$t('posts.descriptionPlaceholderCreate')" class="block w-full mb-3" />
                 <Textarea v-model="form.text" :placeholder="$t('posts.textPlaceholderCreate')" autoresize="true" class="block w-full mb-3" rows="6" />
 
-                <Divider align="center" type="dashed" class="text-sm">
-                    <b>{{ $t('posts.attachFiles') }}</b>
-                </Divider>
-
-                <FileUpload name="demo[]" :customUpload="true" @uploader="createAttachments" v-model="this.attachments" :multiple="true"/>
                 <Button @click.prevent="createPost()" class="mt-3">{{ post.id ?  $t('posts.updateText') : $t('posts.createText') }}</Button>
             </div>
             <div class="col-12 xl:col-4">
                 <div class="bg-white border-solid border-1 p-3 border-round-lg border-300">
                     <h3 class="my-0">{{ $t('posts.attachedFiles') }}</h3>
-                    <AttachmentList :editable="true" />
+                    <AttachmentList :editable="true" @update_files="updateFiles" />
                     <Divider />
                 </div>
             </div>
@@ -43,31 +38,27 @@
 <script>
 import Button from 'primevue/button'
 import Divider from 'primevue/divider';
-import FileUpload from 'primevue/fileupload';
 import InputText from 'primevue/inputtext'
 import Textarea from 'primevue/textarea'
 import { mapActions, mapGetters } from 'vuex'
 import AttachmentList from '@/components/attachments/AttachmentList.vue'
 import Dropdown from 'primevue/dropdown';
-import attachmentsCreate from '~/mixins/attachmentsCreate.js'
 
 
 export default {
     components: {
-        Button, InputText, Textarea, FileUpload,
+        Button, InputText, Textarea,
         Divider, AttachmentList, Dropdown,
     },
-    mixins: [
-        attachmentsCreate,
-    ],
+    
     data () {
         const post = this.$store.getters['roomposts/item']
 
         return {
             form: {
-                title: post.title,
-                text: post.text,
-                description: post.description,
+                title: post.title || '',
+                text: post.text || '',
+                description: post.description || '',
                 room_id: this.$route.params.id,
                 type: this.$route.query.type || 'material'
             },
@@ -76,31 +67,42 @@ export default {
                 {name: this.$t('posts.homeworkType'), value: 'homework'},
             ],
             type: undefined,
+            attachments: []
         }
     },
 
     computed: {
         ...mapGetters({
             errors: 'roomposts/errors',
-            post: 'roomposts/item'
+            post: 'roomposts/item',
         }),
     },
-
     methods: {
         ...mapActions({
             create: 'roomposts/create',
             attachFiles: 'attachments/create'
         }),
+        updateFiles(files){
+            this.attachments = files
+        },
 
         back() {
             this.$router.go(-1)
         },
         async createNewPost(postForm, attachments) {
-            await this.create(postForm)
-
+            let response = await this.create(postForm)
+            if (!response.ok) {
+                this.$toast.add({
+                    severity: 'error',
+                    summary: this.$t('basics.errorPop'),
+                    detail: this.$t('posts.createError'),
+                    life: 3000
+                })
+                return
+            }
             this.$toast.add({
                 severity: 'success',
-                summary: this.$t('basic.successPop'),
+                summary: this.$t('basics.successPop'),
                 detail: this.$t('posts.createSuccess'),
                 life: 3000
             })
@@ -148,4 +150,5 @@ export default {
         },
     }
 }
+
 </script>

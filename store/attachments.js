@@ -16,11 +16,17 @@ export const getters = {
     items(state) {
         return state.items
     },
+    errors(state) {
+        return state.errors
+    },
 }
 
 export const mutations = {
     SET_ITEMS(state, items) {
         state.items = items;
+    },
+    ADD_ITEMS(state, items) {
+        state.items.push(...items) ;
     },
     SET_ITEM(state, item) {
         state.item = item
@@ -53,6 +59,7 @@ export const actions = {
             commit('SET_ITEMS', uploadedAttachments.concat(response.body.created))
             commit('SET_ERRORS', {})
         } catch (e) {
+            //commit('SET_ERRORS', e.response.body.detail)
             console.error(e)
         }
     },

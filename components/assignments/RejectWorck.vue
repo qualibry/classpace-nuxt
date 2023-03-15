@@ -29,7 +29,6 @@
 import { mapActions } from 'vuex';
 import AttachmentList from '@/components/attachments/AttachmentList.vue'
 import InputSwitch from 'primevue/inputswitch';
-import FileUpload from 'primevue/fileupload';
 import Badge from 'primevue/badge';
 import Button from 'primevue/button';
 import attachmentsCreate from '~/mixins/attachmentsCreate.js'
@@ -40,7 +39,7 @@ import Textarea from 'primevue/textarea';
 export default {
   components: {
     AttachmentList,InputSwitch,
-    FileUpload,Badge,Button,
+    Badge,Button,
     attachmentsCreate,SelectButton,
     InputNumber,Textarea
   },
