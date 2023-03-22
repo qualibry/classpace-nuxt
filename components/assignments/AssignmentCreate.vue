@@ -8,6 +8,12 @@
                 >
                 </Badge>
             </h3>
+            <div class="mb-3">
+                <h3>
+                   {{ $t('homeworks.teacherComment')}}
+                </h3>
+                <Textarea v-model="assignment.comment" disabled  autoResize></Textarea>
+            </div>
             <Button
                 label="Submit"
                 icon="pi pi-check"
@@ -36,12 +42,12 @@ import InputSwitch from 'primevue/inputswitch';
 import Badge from 'primevue/badge';
 import Button from 'primevue/button';
 import attachmentsCreate from '~/mixins/attachmentsCreate.js'
-
+import Textarea from 'primevue/textarea';
 
 export default {
     components: {
         AttachmentList, Badge,
-        Button, InputSwitch,
+        Button, InputSwitch,Textarea
     },
     mixins: [attachmentsCreate],
     data() {

@@ -5,7 +5,7 @@
         <div class="col-12 xl:col-8">
             <div class="mb-3">
               <h5>Comment</h5>
-              <Textarea v-model="value2" :autoResize="true" rows="5" cols="40" />
+              <Textarea v-model="commentValue" :autoResize="true" rows="5" cols="40" />
             </div>
             <Button
                 label="Reject"

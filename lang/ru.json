@@ -127,7 +127,8 @@
         "status": "Статус",
         "assignmentTitle": "Cданная работа",
         "attachmentNotUploadedError": "Данный файл не загружен",
-        "studentColumn": "ФИО студента"
+        "studentColumn": "ФИО студента",
+        "teacherComment": "Комментарий преподавателя"
     },
     "posts": {
         "attachedFiles": "Файлы",

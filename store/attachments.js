@@ -26,7 +26,7 @@ export const mutations = {
         state.items = items;
     },
     ADD_ITEMS(state, items) {
-        state.items.push(...items) ;
+        state.items.push(...items);
     },
     SET_ITEM(state, item) {
         state.item = item

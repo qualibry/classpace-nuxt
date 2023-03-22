@@ -7,17 +7,13 @@
             <h2 class="my-0">{{ post.title }}</h2>
         </div>
         <Dialog
+            :header="$t('homeworks.assignmentTitle')" 
             :visible="displayAssignment"
-            :style="{width: '100%', padding: '0 10%', boxShadow: 'none'}"
+            :style="{width: '50vw', boxShadow: 'none'}"
             :modal="true"
             @update:visible="changeAssignmentVisibility"
             @show="fetchAssignment"
         >
-            <template #header>
-                <h3>
-                    {{ $t('homeworks.assignmentTitle') + ' ' + post.title}}
-                </h3>
-            </template>
             <AssignmentCreate />
         </Dialog>
         <div class="grid">
@@ -102,11 +98,8 @@
                 await this.$store.dispatch('assignments/myInPost', this.post.id)
 
                 const assignment = this.$store.getters['assignments/item']
-                let attachments = []
-
-                if(assignment) {
-                    attachments = assignment.attachments
-                }
+                
+                let attachments =  assignment.attachments || []
                 await this.$store.commit('attachments/SET_ITEMS', attachments)
             }
         }
