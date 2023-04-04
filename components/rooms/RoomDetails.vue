@@ -18,7 +18,7 @@
                 <p class="text-lg mt-0">{{ room.description }}</p>
                 <div>
                     <span class="text-sm mb-2 block">{{ $t('rooms.linkToJoin') }}:</span>
-                    <div class="col-5 p-0 mb-4">
+                    <div class="sm:col-5 p-0 mb-4">
                         <div class="p-inputgroup" v-if="currentParticipation.is_moderator">
                             <InputText placeholder="Link to join" v-model="joinLink" disabled />
                             <Button :label="$t('rooms.copyToClipboard')" @click.prevent="copyJoinLink()" />
@@ -27,6 +27,7 @@
                 </div>
                 <div class="flex">
                     <Button v-if="currentParticipation.can_manage_assignments" class="p-button-outlined">{{ $t('homeworks.assignedHomeworksCount') }}</Button>
+                    <Button class="p-button-outlined ml-2">{{ $t('homeworks.courseTopics') }}</Button>
                 </div>
                 <Divider />
                 
