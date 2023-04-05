@@ -27,7 +27,9 @@
                 </div>
                 <div class="flex">
                     <Button v-if="currentParticipation.can_manage_assignments" class="p-button-outlined">{{ $t('homeworks.assignedHomeworksCount') }}</Button>
-                    <Button class="p-button-outlined ml-2">{{ $t('homeworks.courseTopics') }}</Button>
+                    <Button @click="$router.push({ name: 'rooms.topics', params: { id: 1, roomId: $route.params.id } })" class="p-button-outlined ml-2">
+                        {{ $t('homeworks.courseTopics') }}
+                    </Button>
                 </div>
                 <Divider />
                 

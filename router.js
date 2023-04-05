@@ -19,6 +19,7 @@ const routes = [
         { path: 'edit/:id', name: 'rooms.edit', component: page('education/rooms/edit.vue'),  meta: { requiresAuth: true } },
         { path: 'join/:link', name: 'rooms.join', component: page('education/rooms/join.vue'),  meta: { requiresAuth: true } },
         { path: 'add-post/:id', name: 'rooms.add.post', component: page('education/rooms/posts/create.vue'),  meta: { requiresAuth: true } },
+        { path: ':roomId/topics/:id', name: 'rooms.topics', component: page('education/rooms/posts/topic.vue'),  meta: { requiresAuth: true } },
         { path: ':roomId/posts/:postId', component: page('education/rooms/layout.vue'), children: [
             { path: '', name: 'rooms.post.detail', component: page('education/rooms/posts/detail.vue'),  meta: { requiresAuth: true } },
             { path: 'edit', name: 'rooms.post.update', component: page('education/rooms/posts/update.vue'),  meta: { requiresAuth: true } },
