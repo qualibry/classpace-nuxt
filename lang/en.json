@@ -1,126 +1,130 @@
 {
-    "test": "Test message",
-    "rooms": {
-        "list": "List of your rooms",
-        "description": "A list of rooms available to you is displayed here. You can also create your own room.",
-        "create": "Create new room",
-        "roomManage": "Manage room",
-        "roomName": "Course name",
-        "roomCreator": "Creator",
-        "roomDescription": "Description",
-        "linkToJoin": "Link to join",
-        "copyToClipboard": "Copy to clipboard",
-        "addMaterials": "Add material",
-        "addHomework": "Add homework",
-        "membersInfo": "Members info",
-        "homeworks": "Homeworks",
-        "materials": "Educational materials",
-        "messageNoRoom": "At the moment you are not a member of any rooms. Join or create your own room!"
+  "test": "Test message",
+  "rooms": {
+    "list": "List of your rooms",
+    "description": "A list of rooms available to you is displayed here. You can also create your own room.",
+    "create": "Create new room",
+    "roomManage": "Manage room",
+    "roomName": "Course name",
+    "roomCreator": "Creator",
+    "roomDescription": "Description",
+    "linkToJoin": "Link to join",
+    "copyToClipboard": "Copy to clipboard",
+    "addMaterials": "Add material",
+    "addHomework": "Add homework",
+    "membersInfo": "Members info",
+    "homeworks": "Homeworks",
+    "materials": "Educational materials",
+    "messageNoRoom": "At the moment you are not a member of any rooms. Join or create your own room!"
+  },
+  "chat": {
+    "chatList": "List of your dialogs"
+  },
+  "sidebar": {
+    "group-title": {
+      "navigation": "Navigation",
+      "education": "Education",
+      "profile": "My profile"
     },
-    "chat":{
-        "chatList": "List of your dialogs"
-    },
-    "sidebar": {
-        "group-title": {
-            "navigation": "Navigation",
-            "education": "Education",
-            "profile": "My profile"
-        },
-        "links": {
-            "dashboard": "Dashboard",
-            "rooms": "Rooms",
-            "dialogs": "Dialogs",
-            "profile": "My profile",
-            "logout": "Log out",
-            "login": "Log in",
-            "registration": "Registration"
-        }
-    },
-    "messages": {
-        "showMore": "show more"
-    },
-    "header": {
-        "search": "Search...",
-        "sign-in": "Log in",
-        "sign-up": "Sign up"
-    },
-    "back-to-home": "Back to home",
-    "login": {
-        "title": "Authorization",
-        "placeholders": {
-            "email": "Your E-Mail",
-            "phone": "Your phone",
-            "password": "Enter the password"
-        },
-        "dividers": {
-            "or": "OR",
-            "password": "Your password"
-        },
-        "remember": "Remember me",
-        "button": "Log in"
-    },
-    "registration": {
-        "title": "Registration",
-        "placeholders": {
-            "email": "Your E-Mail",
-            "phone": "Your phone",
-            "first-name": "First name",
-            "last-name": "Last name",
-            "middle-name": "Middle name (optional)",
-            "password": "Enter the password",
-            "repeat-password": "Repeat the password"
-        },
-        "dividers": {
-            "credentials": "Credentials",
-            "personal": "Personals",
-            "password-eula": "Password and EULA"
-        },
-        "eula": "Accept EULA",
-        "button": "Sign up for free"
-    },
-    "posts": {
-        "attachedFiles": "Файлы",
-        "filesAttached": "файлов прикреплено",
-        "editButton": "Изменить",
-        "deleteButton": "Удалить",
-        "addNewOne": "Добавить пост",
-        "attachFiles": "Прикрепить файлы",
-        "materialType": "Материал",
-        "homeworkType": "Домашнее задание",
-        "updateText": "Обновить",
-        "createText": "Add",
-        "createSuccess": "Пост добавлен",
-        "attachmentDownloadError": "Не удалось скачать файл",
-        "attachmentAdded": "Вложения добавлены"
-    },
-    "homeworks": {
-        "assignedHomeworksCount": "Submitted works",
-        "description": "description homework",
-        "showAssignment": "Show Assignment",
-        "noAssignments": "At the moment there are no completed works 😞",
-        "assignedSuccess": "The work has been successfully completed!",
-        "encourageMessage": "Continue to please the teacher!",
-        "assignAttach": "download",
-        "assignDownload": "download",
-        "unassignedStatus": "not passed",
-        "status": "Status",
-        "assignmentTitle": "Submitted work",
-        "attachmentNotUploadedError": "This file has not been uploaded",
-        "studentColumn": "Student's full name"
-    },
-    "recovery": {
-        "title": "Password recovery",
-        "description": "Enter your E-Mail. A link for password recovery will be sent to it.",
-        "placeholders": {
-            "email": "Your E-Mail",
-            "password": "Your new password",
-            "repeatPassword": "Repeat new password"
-        },
-        "button": "Recover password",
-        "cancelText": "Cancel password recovery",
-        "resetTitle": "Reset your password",
-        "passwordDescription": "Enter your new password",
-        "resetPasswordDescription": "Repeat your new password",
-        "resetButton": "Accept"
+    "links": {
+      "dashboard": "Dashboard",
+      "rooms": "Rooms",
+      "dialogs": "Dialogs",
+      "profile": "My profile",
+      "logout": "Log out",
+      "login": "Log in",
+      "registration": "Registration"
     }
+  },
+  "messages": {
+    "showMore": "show more"
+  },
+  "header": {
+    "search": "Search...",
+    "sign-in": "Log in",
+    "sign-up": "Sign up"
+  },
+  "back-to-home": "Back to home",
+  "login": {
+    "title": "Authorization",
+    "placeholders": {
+      "email": "Your E-Mail",
+      "phone": "Your phone",
+      "password": "Enter the password"
+    },
+    "dividers": {
+      "or": "OR",
+      "password": "Your password"
+    },
+    "remember": "Remember me",
+    "button": "Log in"
+  },
+  "registration": {
+    "title": "Registration",
+    "placeholders": {
+      "email": "Your E-Mail",
+      "phone": "Your phone",
+      "first-name": "First name",
+      "last-name": "Last name",
+      "middle-name": "Middle name (optional)",
+      "password": "Enter the password",
+      "repeat-password": "Repeat the password"
+    },
+    "dividers": {
+      "credentials": "Credentials",
+      "personal": "Personals",
+      "password-eula": "Password and EULA"
+    },
+    "eula": "Accept EULA",
+    "button": "Sign up for free"
+  },
+  "posts": {
+    "attachedFiles": "Файлы",
+    "filesAttached": "файлов прикреплено",
+    "editButton": "Изменить",
+    "deleteButton": "Удалить",
+    "addNewOne": "Добавить пост",
+    "attachFiles": "Прикрепить файлы",
+    "materialType": "Материал",
+    "homeworkType": "Домашнее задание",
+    "updateText": "Обновить",
+    "createText": "Add",
+    "createSuccess": "Пост добавлен",
+    "attachmentDownloadError": "Не удалось скачать файл",
+    "attachmentAdded": "Вложения добавлены"
+  },
+  "homeworks": {
+    "assignedHomeworksCount": "Submitted works",
+    "description": "description homework",
+    "showAssignment": "Show Assignment",
+    "noAssignments": "At the moment there are no completed works 😞",
+    "assignedSuccess": "The work has been successfully completed!",
+    "encourageMessage": "Continue to please the teacher!",
+    "assignAttach": "download",
+    "assignDownload": "download",
+    "unassignedStatus": "not passed",
+    "status": "Status",
+    "assignmentTitle": "Submitted work",
+    "attachmentNotUploadedError": "This file has not been uploaded",
+    "studentColumn": "Student's full name",
+    "createdDate": "Created date",
+    "comment": "Teacher comment",
+    "rate": "Rate",
+    "action": "Action"
+  },
+  "recovery": {
+    "title": "Password recovery",
+    "description": "Enter your E-Mail. A link for password recovery will be sent to it.",
+    "placeholders": {
+      "email": "Your E-Mail",
+      "password": "Your new password",
+      "repeatPassword": "Repeat new password"
+    },
+    "button": "Recover password",
+    "cancelText": "Cancel password recovery",
+    "resetTitle": "Reset your password",
+    "passwordDescription": "Enter your new password",
+    "resetPasswordDescription": "Repeat your new password",
+    "resetButton": "Accept"
+  }
 }
