@@ -90,7 +90,7 @@ export const actions = {
           } 
         }
       )
-      
+
       commit('ADD_TOPIC', response.data)
     } catch (e) {
       console.error(e)
@@ -98,7 +98,7 @@ export const actions = {
   },
 
 
-  async updateTopic({ commit }, requestData) {
+  async updateTopic({ commit, dispatch }, requestData) {
     const client = await apiClient
     const accessToken = this.$cookies.get('token')
 
@@ -113,7 +113,8 @@ export const actions = {
           },
           requestBody: requestData.body
         })
-        commit('UPDATE_TOPIC', response.obj)
+        dispatch('getTopics', requestData.roomId)
+        // commit('UPDATE_TOPIC', response.obj)
 
     } catch (e) {
       console.error(e)
