@@ -6,9 +6,8 @@
                 <Button icon="pi pi-arrow-left" class="p-button-rounded p-button-text p-button-plain mr-2" />
             </NuxtLink>
             <h2 class="my-0">{{ room.name }}</h2>
-            <Button v-if="currentParticipation.is_moderator" type="button" :label="$t('rooms.roomManage')" 
-                class="ml-auto" @click="toggleManageRoom" aria-haspopup="true" aria-controls="overlay_menu"
-            />
+            <Button v-if="currentParticipation.is_moderator" type="button" :label="$t('rooms.roomManage')" class="ml-auto"
+                @click="toggleManageRoom" aria-haspopup="true" aria-controls="overlay_menu" />
             <Menu v-if="currentParticipation.is_moderator" id="overlay_menu" ref="menu" :model="items" :popup="true" />
         </div>
         <div class="grid">
@@ -26,19 +25,23 @@
                     </div>
                 </div>
                 <div class="flex">
-                    <Button v-if="currentParticipation.can_manage_assignments" class="p-button-outlined">{{ $t('homeworks.assignedHomeworksCount') }}</Button>
-                    <Button @click="$router.push({ name: 'rooms.topics', params: { id: 1, roomId: $route.params.id } })" class="p-button-outlined ml-2">
+                    <Button v-if="currentParticipation.can_manage_assignments" class="p-button-outlined">{{
+                        $t('homeworks.assignedHomeworksCount') }}</Button>
+                    <Button @click="$router.push({ name: 'rooms.topics', params: { roomId: $route.params.id } })"
+                        class="p-button-outlined ml-2">
                         {{ $t('homeworks.courseTopics') }}
                     </Button>
                 </div>
                 <Divider />
-                
+
                 <div class="grid">
                     <div class="col-12 xl:col-6">
                         <div class="flex align-items-center">
                             <h3>{{ $t('rooms.materials') }}</h3>
-                            <NuxtLink v-if="currentParticipation.can_manage_posts" :to="'/rooms/add-post/' + room.id + '?type=material'">
-                                <Button icon="pi pi-plus" class="p-button-rounded p-button-text p-button-sm ml-2" v-tooltip.top="$t('rooms.addMaterials')" />
+                            <NuxtLink v-if="currentParticipation.can_manage_posts"
+                                :to="'/rooms/add-post/' + room.id + '?type=material'">
+                                <Button icon="pi pi-plus" class="p-button-rounded p-button-text p-button-sm ml-2"
+                                    v-tooltip.top="$t('rooms.addMaterials')" />
                             </NuxtLink>
                         </div>
                         <PostList :type="'material'" />
@@ -46,8 +49,10 @@
                     <div class="col-12 xl:col-6">
                         <div class="flex align-items-center">
                             <h3>{{ $t('rooms.homeworks') }}</h3>
-                            <NuxtLink v-if="currentParticipation.can_manage_posts" :to="'/rooms/add-post/' + room.id + '?type=homework'">
-                                <Button icon="pi pi-plus" class="p-button-rounded p-button-text p-button-sm ml-2" v-tooltip.top="$t('rooms.addHomework')" />
+                            <NuxtLink v-if="currentParticipation.can_manage_posts"
+                                :to="'/rooms/add-post/' + room.id + '?type=homework'">
+                                <Button icon="pi pi-plus" class="p-button-rounded p-button-text p-button-sm ml-2"
+                                    v-tooltip.top="$t('rooms.addHomework')" />
                             </NuxtLink>
                         </div>
                         <PostList :type="'homework'" />
@@ -61,25 +66,16 @@
                     <Divider />
                     <Participants />
                 </div>
-                
+
                 <div class="col-10">
                     <h3>Фильтры</h3>
                     <h4>{{ $t('rooms.searchPost') }}</h4>
-                    <InputText
-                        class="p-inputtext-sm"
-                        :placeholder="$t('rooms.searchPlaceholder')"
-                        v-model="searchPost"
-                        @change="searchInPosts"
-                    />
+                    <InputText class="p-inputtext-sm" :placeholder="$t('rooms.searchPlaceholder')" v-model="searchPost"
+                        @change="searchInPosts" />
                 </div>
                 <div class="col-10">
                     <h4>{{ $t('rooms.orderPost') }}</h4>
-                    <SelectButton
-                        v-model="selectedOrdering"
-                        :options="ordering"
-                        optionLabel="name"
-                        optionValue="code"
-                    />
+                    <SelectButton v-model="selectedOrdering" :options="ordering" optionLabel="name" optionValue="code" />
                 </div>
             </div>
         </div>
@@ -125,41 +121,42 @@ export default {
             })
         },
         selectedOrdering() {
-            this.$router.push({name: this.$route.name, query: {...this.$route.query, ordering: this.selectedOrdering}})
+            this.$router.push({ name: this.$route.name, query: { ...this.$route.query, ordering: this.selectedOrdering } })
         },
-        locale(newV){
+        locale(newV) {
             if (newV == 'en') {
                 this.items[0] = {
                     label: 'Room manage',
                     items: [
-                    {
-                        label: 'Edit',
-                        icon: 'pi pi-pencil',
-                        command: () => {
-                            this.$router.push({ name: 'rooms.edit', params: { id: this.room.id } })
+                        {
+                            label: 'Edit',
+                            icon: 'pi pi-pencil',
+                            command: () => {
+                                this.$router.push({ name: 'rooms.edit', params: { id: this.room.id } })
+                            }
+                        },
+                        {
+                            label: 'Delete', //this.locale == 'en'?  'Delete' : 'Удалить',
+                            icon: 'pi pi-times',
+                            command: () => {
+                                this.$confirm.require({
+                                    header: 'Confirm the action',
+                                    message: 'Do you really want to delete a room?',
+                                    icon: 'pi pi-exclamation-triangle',
+                                    accept: () => {
+                                        this.deleteRoomHelper()
+                                    },
+                                    reject: () => { }
+                                });
+                            }
                         }
-                    },
-                    {
-                        label:'Delete', //this.locale == 'en'?  'Delete' : 'Удалить',
-                        icon: 'pi pi-times',
-                        command: () => {
-                            this.$confirm.require({
-                                header: 'Confirm the action',
-                                message: 'Do you really want to delete a room?',
-                                icon: 'pi pi-exclamation-triangle',
-                                accept: () => {
-                                    this.deleteRoomHelper()
-                                },
-                                reject: () => {}
-                            });
-                        }
-                    }
-                ]}
+                    ]
+                }
             }
             else {
                 this.items[0] = {
-                        label: 'Управление комнатой',
-                        items: [
+                    label: 'Управление комнатой',
+                    items: [
                         {
                             label: 'Редактировать',
                             icon: 'pi pi-pencil',
@@ -168,7 +165,7 @@ export default {
                             }
                         },
                         {
-                            label:'Удалить', //this.locale == 'en'?  'Delete' : 'Удалить',
+                            label: 'Удалить', //this.locale == 'en'?  'Delete' : 'Удалить',
                             icon: 'pi pi-times',
                             command: () => {
                                 this.$confirm.require({
@@ -178,11 +175,12 @@ export default {
                                     accept: () => {
                                         this.deleteRoomHelper()
                                     },
-                                    reject: () => {}
+                                    reject: () => { }
                                 });
                             }
                         }
-                    ]}
+                    ]
+                }
             }
         }
     },
@@ -191,57 +189,59 @@ export default {
             this.items[0] = {
                 label: 'Room manage',
                 items: [
-                {
-                    label: 'Edit',
-                    icon: 'pi pi-pencil',
-                    command: () => {
-                        this.$router.push({ name: 'rooms.edit', params: { id: this.room.id } })
+                    {
+                        label: 'Edit',
+                        icon: 'pi pi-pencil',
+                        command: () => {
+                            this.$router.push({ name: 'rooms.edit', params: { id: this.room.id } })
+                        }
+                    },
+                    {
+                        label: 'Delete', //this.locale == 'en'?  'Delete' : 'Удалить',
+                        icon: 'pi pi-times',
+                        command: () => {
+                            this.$confirm.require({
+                                header: 'Confirm the action',
+                                message: 'Do you really want to delete a room?',
+                                icon: 'pi pi-exclamation-triangle',
+                                accept: () => {
+                                    this.deleteRoomHelper()
+                                },
+                                reject: () => { }
+                            });
+                        }
                     }
-                },
-                {
-                    label:'Delete', //this.locale == 'en'?  'Delete' : 'Удалить',
-                    icon: 'pi pi-times',
-                    command: () => {
-                        this.$confirm.require({
-                            header: 'Confirm the action',
-                            message: 'Do you really want to delete a room?',
-                            icon: 'pi pi-exclamation-triangle',
-                            accept: () => {
-                                this.deleteRoomHelper()
-                            },
-                            reject: () => {}
-                        });
-                    }
-                }
-            ]}
+                ]
+            }
         }
-        else{
+        else {
             this.items[0] = {
                 label: 'Управление комнатой',
                 items: [
-                {
-                    label: 'Редактировать',
-                    icon: 'pi pi-pencil',
-                    command: () => {
-                        this.$router.push({ name: 'rooms.edit', params: { id: this.room.id } })
+                    {
+                        label: 'Редактировать',
+                        icon: 'pi pi-pencil',
+                        command: () => {
+                            this.$router.push({ name: 'rooms.edit', params: { id: this.room.id } })
+                        }
+                    },
+                    {
+                        label: 'Удалить', //this.locale == 'en'?  'Delete' : 'Удалить',
+                        icon: 'pi pi-times',
+                        command: () => {
+                            this.$confirm.require({
+                                header: 'Вы уверены?',
+                                message: 'Вы действительно хотите удалить комнату?',
+                                icon: 'pi pi-exclamation-triangle',
+                                accept: () => {
+                                    this.deleteRoomHelper()
+                                },
+                                reject: () => { }
+                            });
+                        }
                     }
-                },
-                {
-                    label:'Удалить', //this.locale == 'en'?  'Delete' : 'Удалить',
-                    icon: 'pi pi-times',
-                    command: () => {
-                        this.$confirm.require({
-                            header: 'Вы уверены?',
-                            message: 'Вы действительно хотите удалить комнату?',
-                            icon: 'pi pi-exclamation-triangle',
-                            accept: () => {
-                                this.deleteRoomHelper()
-                            },
-                            reject: () => {}
-                        });
-                    }
-                }
-            ]}
+                ]
+            }
         }
     },
     data() {
@@ -249,9 +249,9 @@ export default {
             items: [],
             searchPost: '',
             ordering: [
-				{name: this.$t('ordering.creationDateAsc'), code: '-created_at'},
-				{name: this.$t('ordering.title'), code: 'title'},
-			],
+                { name: this.$t('ordering.creationDateAsc'), code: '-created_at' },
+                { name: this.$t('ordering.title'), code: 'title' },
+            ],
             selectedOrdering: '',
         }
     },
@@ -264,15 +264,15 @@ export default {
             this.$refs.menu.toggle(event);
         },
         async searchInPosts() {
-            this.$router.push({name: 'rooms.show', query: {search: this.searchPost}})
+            this.$router.push({ name: 'rooms.show', query: { search: this.searchPost } })
         },
         async deleteRoomHelper() {
             await this.deleteRoom(this.room.id)
 
             this.$toast.add({
-                severity:'info',
-                summary:'Success',
-                detail:'You deleted the room',
+                severity: 'info',
+                summary: 'Success',
+                detail: 'You deleted the room',
                 life: 3000
             });
 
@@ -284,12 +284,12 @@ export default {
                 this.copied = true
 
                 this.$toast.add({
-                    severity:'success',
-                    summary: this.locale == 'en'? 'Success' : 'Успех',
-                    detail: this.locale == 'en'? 'Link copied!' : 'Ссылка скопирована',
+                    severity: 'success',
+                    summary: this.locale == 'en' ? 'Success' : 'Успех',
+                    detail: this.locale == 'en' ? 'Link copied!' : 'Ссылка скопирована',
                     life: 3000
                 });
-            } catch(e) {
+            } catch (e) {
                 console.error(e)
             }
         }
