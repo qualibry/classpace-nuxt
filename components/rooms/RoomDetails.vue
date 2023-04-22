@@ -103,7 +103,9 @@ export default {
     PostList,
     SelectButton,
   },
-  mounted() { },
+  mounted() {
+    this.$store.commit("roomposts/SET_IS_INFINITE_SCROLL", false);
+  },
   computed: {
     ...mapGetters({
       limitMaterials: "roomposts/limitMaterials",

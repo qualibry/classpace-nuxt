@@ -31,7 +31,9 @@
     "confirmDeletePost": "Do you really want to delete a post",
     "updateHeader": "Room change",
     "lastUpdated": "last updated",
-    "updateBtn": "change"
+    "updateBtn": "change",
+    "yes": "Yes",
+    "no": "No"
   },
   "chat": {
     "chatList": "List of your dialogs"
@@ -109,7 +111,10 @@
     "createText": "Add",
     "createSuccess": "Post added",
     "attachmentDownloadError": "Failed to download file",
-    "attachmentAdded": "Attachments added"
+    "attachmentAdded": "Attachments added",
+    "titlePlaceholderCreate": "Post title",
+    "descriptionPlaceholderCreate": "Brief description of the post",
+    "textPlaceholderCreate": "Post text"
   },
   "homeworks": {
     "assignedHomeworksCount": "Submitted works",

@@ -1,28 +1,28 @@
 <template>
     <div class="attachments-add">
         <div class="flex align-items-center mb-3">
-            <Button @click.prevent="back()" icon="pi pi-arrow-left" class="p-button-rounded p-button-text p-button-plain mr-2" />
+            <Button @click.prevent="back()" icon="pi pi-arrow-left"
+                class="p-button-rounded p-button-text p-button-plain mr-2" />
             <h2 class="my-0">{{ post.id ? post.title : $t('posts.addNewOne') }}</h2>
         </div>
         <div class="grid">
             <div class="col-12 xl:col-5">
                 <label class="text-sm mb-3 block">
-                    <Dropdown
-                        v-model="form.type"
-                        optionValue="value"
-                        :options="postTypes"
-                        optionLabel="name"
-                        placeholder="Select a Post Type"
-                    />
+                    <Dropdown v-model="form.type" optionValue="value" :options="postTypes" optionLabel="name"
+                        placeholder="Select a Post Type" />
                 </label>
                 <div class="mb-3">
-                    <InputText v-model="form.title" :placeholder="$t('posts.titlePlaceholderCreate')" class="block w-full" />
+                    <InputText v-model="form.title" :placeholder="$t('posts.titlePlaceholderCreate')"
+                        class="block w-full" />
                     <span class="text-sm text-red-400" v-if="errors.title">{{ errors.title }}</span>
                 </div>
-                <InputText v-model="form.description" :placeholder="$t('posts.descriptionPlaceholderCreate')" class="block w-full mb-3" />
-                <Textarea v-model="form.text" :placeholder="$t('posts.textPlaceholderCreate')" autoresize="true" class="block w-full mb-3" rows="6" />
+                <InputText v-model="form.description" :placeholder="$t('posts.descriptionPlaceholderCreate')"
+                    class="block w-full mb-3" />
+                <Textarea v-model="form.text" :placeholder="$t('posts.textPlaceholderCreate')" autoresize="true"
+                    class="block w-full mb-3" rows="6" />
 
-                <Button @click.prevent="createPost()" class="mt-3">{{ post.id ?  $t('posts.updateText') : $t('posts.createText') }}</Button>
+                <Button @click.prevent="createPost()" class="mt-3">{{ post.id ? $t('posts.updateText') :
+                    $t('posts.createText') }}</Button>
             </div>
             <div class="col-12 xl:col-4">
                 <div class="bg-white border-solid border-1 p-3 border-round-lg border-300">
@@ -50,8 +50,8 @@ export default {
         Button, InputText, Textarea,
         Divider, AttachmentList, Dropdown,
     },
-    
-    data () {
+
+    data() {
         const post = this.$store.getters['roomposts/item']
 
         return {
@@ -63,26 +63,33 @@ export default {
                 type: this.$route.query.type || 'material'
             },
             postTypes: [
-                {name: this.$t('posts.materialType'), value: 'material'},
-                {name: this.$t('posts.homeworkType'), value: 'homework'},
+                { name: this.$t('posts.materialType'), value: 'material' },
+                { name: this.$t('posts.homeworkType'), value: 'homework' },
             ],
             type: undefined,
             attachments: []
         }
     },
-
     computed: {
         ...mapGetters({
             errors: 'roomposts/errors',
             post: 'roomposts/item',
+            locale: "locale/locale",
         }),
+    },
+    watch: {
+        locale() {
+            this.postTypes = [
+                { name: this.$t('posts.materialType'), value: 'material' },
+                { name: this.$t('posts.homeworkType'), value: 'homework' },]
+        }
     },
     methods: {
         ...mapActions({
             create: 'roomposts/create',
             attachFiles: 'attachments/create'
         }),
-        updateFiles(files){
+        updateFiles(files) {
             this.attachments = files
         },
 
@@ -129,15 +136,15 @@ export default {
             })
 
             this.$toast.add({
-                severity:'info',
-                summary:'Success',
-                detail:'Post updated',
+                severity: 'info',
+                summary: 'Success',
+                detail: 'Post updated',
                 life: 3000
             })
         },
 
         async createPost() {
-            if(!this.post.id) {
+            if (!this.post.id) {
                 await this.createNewPost(
                     this.form,
                     this.$store.getters['attachments/items'],
@@ -146,6 +153,14 @@ export default {
                 await this.updatePost(
                     { postId: this.post.id, requestBody: this.form }
                 )
+            }
+
+            this.form = {
+                ...this.form,
+                title: '',
+                text: '',
+                description: '',
+                type: 'material'
             }
         },
     }

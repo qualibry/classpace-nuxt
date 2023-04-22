@@ -105,6 +105,8 @@ export default {
         header: `${this.$t('rooms.confirmAction')}`,
         message: `${this.$t('rooms.confirmDeletePost')}?`,
         icon: "pi pi-exclamation-triangle",
+        acceptLabel: `${this.$t('rooms.yes')}`,
+        rejectLabel: `${this.$t('rooms.no')}`,
         accept: () => {
           this.deletePost(post);
         },
