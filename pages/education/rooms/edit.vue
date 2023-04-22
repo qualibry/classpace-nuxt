@@ -17,13 +17,15 @@
             </span>
             <div class="grid">
                 <div class="col-12 xl:col-4">
-                    <label for="first_name" class="mb-1 block">{{ $t('rooms.updateName') }}</label>
-                    <InputText id="first_name" v-model="form.name" class="block w-full mb-4" placeholder="Enter a name of the room..." />
+                    <label for="first_name" class="mb-1 block">{{ $t('rooms.roomName') }}</label>
+                    <InputText id="first_name" v-model="form.name" class="block w-full mb-4"
+                        placeholder="Enter a name of the room..." />
 
-                    <label for="first_name" class="mb-1 block">{{ $t('rooms.updateDescription') }}</label>
-                    <Textarea v-model="form.description" placeholder="Enter a description of the room..." :autoResize="true" rows="6" class="block w-full mb-3" />
+                    <label for="first_name" class="mb-1 block">{{ $t('rooms.roomDescription') }}</label>
+                    <Textarea v-model="form.description" placeholder="Enter a description of the room..." :autoResize="true"
+                        rows="6" class="block w-full mb-3" />
 
-                    <Button @click.prevent="updateRoomById()">{{ $t('rooms.update') }}</Button>
+                    <Button @click.prevent="updateRoomById()">{{ $t('rooms.updateBtn') }}</Button>
                 </div>
             </div>
         </template>
@@ -31,61 +33,61 @@
 </template>
 
 <script>
-    import { mapActions, mapGetters } from 'vuex'
-    import InputText from 'primevue/inputtext'
-    import ProgressSpinner from 'primevue/progressspinner'
-    import Button from 'primevue/button'
-    import Textarea from 'primevue/textarea'
+import { mapActions, mapGetters } from 'vuex'
+import InputText from 'primevue/inputtext'
+import ProgressSpinner from 'primevue/progressspinner'
+import Button from 'primevue/button'
+import Textarea from 'primevue/textarea'
 
-    export default {
-        components: {
-            InputText, ProgressSpinner, Button, Textarea
-        },
-        data () {
-            return {
-                form: {
-                    name: '',
-                    description: ''
-                },
-                loading: true
-            }
-        },
-
-        computed: {
-            ...mapGetters({
-                room: 'rooms/item',
-                errors: 'rooms/errors'
-            })
-        },
-
-        methods: {
-            ...mapActions({
-                updateRoom: 'rooms/updateRoom'
-            }),
-
-            async updateRoomById() {
-                await this.updateRoom({
-                    roomId: this.$route.params.id,
-                    requestBody: this.form
-                })
-
-                if(Object.keys(this.errors).length == 0) {
-                    this.$router.push({ name: 'rooms.show', params: { id: this.room.id } })
-                }
-            }
-        },
-        async created() {
-            await this.$store.dispatch(
-                'rooms/getRoom',
-                this.$route.params.id
-            )
-
-            setTimeout(() => {
-                this.loading = false
-            }, 100)
-
-            this.form.name = this.room.name
-            this.form.description = this.room.description
+export default {
+    components: {
+        InputText, ProgressSpinner, Button, Textarea
+    },
+    data() {
+        return {
+            form: {
+                name: '',
+                description: ''
+            },
+            loading: true
         }
+    },
+
+    computed: {
+        ...mapGetters({
+            room: 'rooms/item',
+            errors: 'rooms/errors'
+        })
+    },
+
+    methods: {
+        ...mapActions({
+            updateRoom: 'rooms/updateRoom'
+        }),
+
+        async updateRoomById() {
+            await this.updateRoom({
+                roomId: this.$route.params.id,
+                requestBody: this.form
+            })
+
+            if (Object.keys(this.errors).length == 0) {
+                this.$router.push({ name: 'rooms.show', params: { id: this.room.id } })
+            }
+        }
+    },
+    async created() {
+        await this.$store.dispatch(
+            'rooms/getRoom',
+            this.$route.params.id
+        )
+
+        setTimeout(() => {
+            this.loading = false
+        }, 100)
+
+        this.form.name = this.room.name
+        this.form.description = this.room.description
     }
+}
 </script>

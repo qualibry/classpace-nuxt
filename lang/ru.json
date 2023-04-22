@@ -17,7 +17,7 @@
     "roomDescription": "Описание",
     "roomCreator": "Автор курса",
     "linkToJoin": "Ссылка на вступление",
-    "roomName": "Название курса",
+    "roomName": "Название",
     "membersInfo": "Участники",
     "homeworks": "Домашние задания",
     "materials": "Учебные материалы",
@@ -26,10 +26,18 @@
     "roomManage": "Управление комнатой",
     "messageNoRoom": "На данный момент вы не являетесь участником ни одной из комнат. Присоединяйтесь или создайте свою собственную комнату!",
     "addFiles": "Добавить файлы",
-    "addFilesButton": "Добавить",
+    "addFilesButton": "Прикрепить файл",
     "searchPost": "Поиск по названию",
     "orderPost": "Сортировать по",
-    "searchPlaceholder": "Искать по названию материала"
+    "searchPlaceholder": "Искать по названию материала",
+    "createdBy": "Создатель",
+    "filters": "Фильтры",
+    "createRoomSuccess": "Вы успешно создали новую комнату",
+    "confirmAction": "Подтвердить действие",
+    "confirmDeletePost": "Вы действительно хотите удалить сообщение",
+    "updateHeader": "Изменение комнаты",
+    "lastUpdated": "Последнее обновление",
+    "updateBtn": "изменить"
   },
   "chat": {
     "chatList": "Список ваших диалогов"
@@ -135,6 +143,8 @@
   "posts": {
     "attachedFiles": "Файлы",
     "filesAttached": "файлов прикреплено",
+    "filesAttached2": "файла прикреплено",
+    "fileAttached": "файл прикреплен",
     "editButton": "Изменить",
     "deleteButton": "Удалить",
     "addNewOne": "Добавить пост",

@@ -3,60 +3,32 @@
     <ConfirmDialog />
     <div class="flex align-items-center mb-3">
       <NuxtLink to="/rooms">
-        <Button
-          icon="pi pi-arrow-left"
-          class="p-button-rounded p-button-text p-button-plain mr-2"
-        />
+        <Button icon="pi pi-arrow-left" class="p-button-rounded p-button-text p-button-plain mr-2" />
       </NuxtLink>
       <h2 class="my-0">{{ room.name }}</h2>
-      <Button
-        v-if="currentParticipation.is_moderator"
-        type="button"
-        :label="$t('rooms.roomManage')"
-        class="ml-auto"
-        @click="toggleManageRoom"
-        aria-haspopup="true"
-        aria-controls="overlay_menu"
-      />
-      <Menu
-        v-if="currentParticipation.is_moderator"
-        id="overlay_menu"
-        ref="menu"
-        :model="items"
-        :popup="true"
-      />
+      <Button v-if="currentParticipation.is_moderator" type="button" :label="$t('rooms.roomManage')" class="ml-auto"
+        @click="toggleManageRoom" aria-haspopup="true" aria-controls="overlay_menu" />
+      <Menu v-if="currentParticipation.is_moderator" id="overlay_menu" ref="menu" :model="items" :popup="true" />
     </div>
     <div class="grid">
       <div class="col-12 xl:col-8">
         <div class="text-sm">
           {{ $t("rooms.roomCreator") }}: <b>{{ room.author.full_name }}</b>
         </div>
-        <span class="text-sm mb-1 mt-3 block"
-          >{{ $t("rooms.roomDescription") }}:</span
-        >
+        <span class="text-sm mb-1 mt-3 block">{{ $t("rooms.roomDescription") }}:</span>
         <p class="text-lg mt-0">{{ room.description }}</p>
         <div>
           <span class="text-sm mb-2 block">{{ $t("rooms.linkToJoin") }}:</span>
           <div class="col-5 p-0 mb-4">
             <div class="p-inputgroup" v-if="currentParticipation.is_moderator">
-              <InputText
-                placeholder="Link to join"
-                v-model="joinLink"
-                disabled
-              />
-              <Button
-                :label="$t('rooms.copyToClipboard')"
-                @click.prevent="copyJoinLink()"
-              />
+              <InputText placeholder="Link to join" v-model="joinLink" disabled />
+              <Button :label="$t('rooms.copyToClipboard')" @click.prevent="copyJoinLink()" />
             </div>
           </div>
         </div>
         <div class="flex">
-          <Button
-            v-if="currentParticipation.can_manage_assignments"
-            class="p-button-outlined"
-            >{{ $t("homeworks.assignedHomeworksCount") }}</Button
-          >
+          <Button v-if="currentParticipation.can_manage_assignments" class="p-button-outlined">{{
+            $t("homeworks.assignedHomeworksCount") }}</Button>
         </div>
         <Divider />
 
@@ -64,78 +36,45 @@
           <div class="col-12 xl:col-6">
             <div class="flex align-items-center">
               <h3>{{ $t("rooms.materials") }}</h3>
-              <NuxtLink
-                v-if="currentParticipation.can_manage_posts"
-                :to="'/rooms/add-post/' + room.id + '?type=material'"
-              >
-                <Button
-                  icon="pi pi-plus"
-                  class="p-button-rounded p-button-text p-button-sm ml-2"
-                  v-tooltip.top="$t('rooms.addMaterials')"
-                />
+              <NuxtLink v-if="currentParticipation.can_manage_posts"
+                :to="'/rooms/add-post/' + room.id + '?type=material'">
+                <Button icon="pi pi-plus" class="p-button-rounded p-button-text p-button-sm ml-2"
+                  v-tooltip.top="$t('rooms.addMaterials')" />
               </NuxtLink>
             </div>
-            <PostList
-              :type="'material'"
-              :items="materialItems"
-              :isFetch="isFetchMaterials"
-              :limit="limitMaterials"
-              :offset="offsetMaterials"
-              :fetchItems="fetchMaterials"
-            />
+            <PostList :type="'material'" :items="materialItems" :isFetch="isFetchMaterials" :limit="limitMaterials"
+              :offset="offsetMaterials" :fetchItems="fetchMaterials" />
           </div>
           <div class="col-12 xl:col-6">
             <div class="flex align-items-center">
               <h3>{{ $t("rooms.homeworks") }}</h3>
-              <NuxtLink
-                v-if="currentParticipation.can_manage_posts"
-                :to="'/rooms/add-post/' + room.id + '?type=homework'"
-              >
-                <Button
-                  icon="pi pi-plus"
-                  class="p-button-rounded p-button-text p-button-sm ml-2"
-                  v-tooltip.top="$t('rooms.addHomework')"
-                />
+              <NuxtLink v-if="currentParticipation.can_manage_posts"
+                :to="'/rooms/add-post/' + room.id + '?type=homework'">
+                <Button icon="pi pi-plus" class="p-button-rounded p-button-text p-button-sm ml-2"
+                  v-tooltip.top="$t('rooms.addHomework')" />
               </NuxtLink>
             </div>
-            <PostList
-              :type="'homework'"
-              :items="homeworkItems"
-              :isFetch="isFetchHomeworks"
-              :limit="limitHomeworks"
-              :offset="offsetHomeworks"
-              :fetchItems="fetchHomeworks"
-            />
+            <PostList :type="'homework'" :items="homeworkItems" :isFetch="isFetchHomeworks" :limit="limitHomeworks"
+              :offset="offsetHomeworks" :fetchItems="fetchHomeworks" />
           </div>
         </div>
       </div>
       <div class="col-12 xl:col-4">
-        <div
-          class="bg-white border-solid border-1 p-3 border-round-lg border-300"
-        >
+        <div class="bg-white border-solid border-1 p-3 border-round-lg border-300">
           <h3 class="my-0">{{ $t("rooms.membersInfo") }}</h3>
           <Divider />
           <Participants />
         </div>
 
         <div class="col-10">
-          <h3>Фильтры</h3>
+          <h3>{{ $t("rooms.filters") }}</h3>
           <h4>{{ $t("rooms.searchPost") }}</h4>
-          <InputText
-            class="p-inputtext-sm"
-            :placeholder="$t('rooms.searchPlaceholder')"
-            v-model="searchPost"
-            @change="searchInPosts"
-          />
+          <InputText class="p-inputtext-sm" :placeholder="$t('rooms.searchPlaceholder')" v-model="searchPost"
+            @change="searchInPosts" />
         </div>
         <div class="col-10">
           <h4>{{ $t("rooms.orderPost") }}</h4>
-          <SelectButton
-            v-model="selectedOrdering"
-            :options="ordering"
-            optionLabel="name"
-            optionValue="code"
-          />
+          <SelectButton v-model="selectedOrdering" :options="ordering" optionLabel="name" optionValue="code" />
         </div>
       </div>
     </div>
@@ -164,7 +103,7 @@ export default {
     PostList,
     SelectButton,
   },
-  mounted() {},
+  mounted() { },
   computed: {
     ...mapGetters({
       limitMaterials: "roomposts/limitMaterials",
@@ -192,6 +131,11 @@ export default {
       this.fetchHomeworks(0, this.offsetHomeworks + 5 || 5);
     },
     locale(newV) {
+      this.ordering = [
+        { name: this.$t("ordering.creationDateAsc"), code: "-created_at" },
+        { name: this.$t("ordering.title"), code: "title" }
+      ]
+
       if (newV == "en") {
         this.items[0] = {
           label: "Room manage",
@@ -217,7 +161,7 @@ export default {
                   accept: () => {
                     this.deleteRoomHelper();
                   },
-                  reject: () => {},
+                  reject: () => { },
                 });
               },
             },
@@ -248,7 +192,7 @@ export default {
                   accept: () => {
                     this.deleteRoomHelper();
                   },
-                  reject: () => {},
+                  reject: () => { },
                 });
               },
             },
@@ -283,7 +227,7 @@ export default {
                 accept: () => {
                   this.deleteRoomHelper();
                 },
-                reject: () => {},
+                reject: () => { },
               });
             },
           },
@@ -314,7 +258,7 @@ export default {
                 accept: () => {
                   this.deleteRoomHelper();
                 },
-                reject: () => {},
+                reject: () => { },
               });
             },
           },

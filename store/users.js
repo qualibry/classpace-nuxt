@@ -142,7 +142,7 @@ export const actions = {
             commit('SET_REGISTRATION_ERRORS', {})
         } catch (e) {
             console.error(e)
-            resposne = e.response
+            response = e.response
             commit('SET_REGISTRATION_ERRORS', e.response.body.detail)
         }
 

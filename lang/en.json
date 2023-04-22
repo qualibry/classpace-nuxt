@@ -1,11 +1,15 @@
 {
   "test": "Test message",
+  "basics": {
+    "successPop": "Success",
+    "errorPop": "Error"
+  },
   "rooms": {
     "list": "List of your rooms",
     "description": "A list of rooms available to you is displayed here. You can also create your own room.",
     "create": "Create new room",
     "roomManage": "Manage room",
-    "roomName": "Course name",
+    "roomName": "Name",
     "roomCreator": "Creator",
     "roomDescription": "Description",
     "linkToJoin": "Link to join",
@@ -15,7 +19,19 @@
     "membersInfo": "Members info",
     "homeworks": "Homeworks",
     "materials": "Educational materials",
-    "messageNoRoom": "At the moment you are not a member of any rooms. Join or create your own room!"
+    "messageNoRoom": "At the moment you are not a member of any rooms. Join or create your own room!",
+    "createdBy": "Created by",
+    "searchPost": "Search by name",
+    "orderPost": "Sort by",
+    "filters": "Filters",
+    "searchPlaceholder": "Search by material name",
+    "addFilesButton": "Attach file",
+    "createRoomSuccess": "You have successfully created a new room",
+    "confirmAction": "Confirm the action",
+    "confirmDeletePost": "Do you really want to delete a post",
+    "updateHeader": "Room change",
+    "lastUpdated": "last updated",
+    "updateBtn": "change"
   },
   "chat": {
     "chatList": "List of your dialogs"
@@ -79,19 +95,21 @@
     "button": "Sign up for free"
   },
   "posts": {
-    "attachedFiles": "Файлы",
-    "filesAttached": "файлов прикреплено",
-    "editButton": "Изменить",
-    "deleteButton": "Удалить",
-    "addNewOne": "Добавить пост",
-    "attachFiles": "Прикрепить файлы",
-    "materialType": "Материал",
-    "homeworkType": "Домашнее задание",
-    "updateText": "Обновить",
+    "attachedFiles": "Files",
+    "filesAttached": "files attached",
+    "filesAttached2": "files attached",
+    "fileAttached": "file attached",
+    "editButton": "Change",
+    "deleteButton": "Delete",
+    "addNewOne": "Add post",
+    "attachFiles": "Attach files",
+    "materialType": "Material",
+    "homeworkType": "Homework",
+    "updateText": "Update",
     "createText": "Add",
-    "createSuccess": "Пост добавлен",
-    "attachmentDownloadError": "Не удалось скачать файл",
-    "attachmentAdded": "Вложения добавлены"
+    "createSuccess": "Post added",
+    "attachmentDownloadError": "Failed to download file",
+    "attachmentAdded": "Attachments added"
   },
   "homeworks": {
     "assignedHomeworksCount": "Submitted works",
@@ -126,5 +144,9 @@
     "passwordDescription": "Enter your new password",
     "resetPasswordDescription": "Repeat your new password",
     "resetButton": "Accept"
+  },
+  "ordering": {
+    "creationDateAsc": "Date of creation",
+    "title": "Name"
   }
 }

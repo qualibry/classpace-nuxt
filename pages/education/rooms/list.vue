@@ -13,16 +13,10 @@
       <template v-if="loading">
         <div class="flex">
           <div class="xl:col-4 col-12">
-            <div
-              class="bg-white border-solid border-1 p-3 border-round-lg border-300"
-            >
+            <div class="bg-white border-solid border-1 p-3 border-round-lg border-300">
               <div class="flex align-items-center mb-2">
                 <Skeleton width="14rem" height="1.2rem" />
-                <Skeleton
-                  width="4rem"
-                  height="1.2rem"
-                  style="margin-left: auto"
-                />
+                <Skeleton width="4rem" height="1.2rem" style="margin-left: auto" />
               </div>
               <Skeleton />
               <Divider />
@@ -31,16 +25,10 @@
             </div>
           </div>
           <div class="xl:col-4 col-12">
-            <div
-              class="bg-white border-solid border-1 p-3 border-round-lg border-300"
-            >
+            <div class="bg-white border-solid border-1 p-3 border-round-lg border-300">
               <div class="flex align-items-center mb-2">
                 <Skeleton width="14rem" height="1.2rem" />
-                <Skeleton
-                  width="4rem"
-                  height="1.2rem"
-                  style="margin-left: auto"
-                />
+                <Skeleton width="4rem" height="1.2rem" style="margin-left: auto" />
               </div>
               <Skeleton />
               <Divider />
@@ -49,16 +37,10 @@
             </div>
           </div>
           <div class="xl:col-4 col-12">
-            <div
-              class="bg-white border-solid border-1 p-3 border-round-lg border-300"
-            >
+            <div class="bg-white border-solid border-1 p-3 border-round-lg border-300">
               <div class="flex align-items-center mb-2">
                 <Skeleton width="14rem" height="1.2rem" />
-                <Skeleton
-                  width="4rem"
-                  height="1.2rem"
-                  style="margin-left: auto"
-                />
+                <Skeleton width="4rem" height="1.2rem" style="margin-left: auto" />
               </div>
               <Skeleton />
               <Divider />
@@ -71,9 +53,7 @@
       <template v-else>
         <div v-if="rooms.total > 0">
           <div class="room-card-container">
-            <a
-              @click="
-                $router.push({
+            <a @click="$router.push({
                   name: 'rooms.show',
                   // query: {
                   //   limit: 50,
@@ -81,32 +61,19 @@
                   // },
                   params: { id: room.room.id },
                 })
-              "
-              v-for="room in rooms.items"
-              class="xl:col-4 col-12 roomContainer"
-              :key="room.id"
-            >
-              <div
-                class="room-card bg-white border-solid border-1 p-3 border-round-lg border-300"
-              >
+                " v-for="room in rooms.items" class="xl:col-4 col-12 roomContainer" :key="room.id">
+              <div class="room-card bg-white border-solid border-1 p-3 border-round-lg border-300">
                 <div class="flex align-items-center mb-2">
-                  <h3
-                    class="m-0 white-space-nowrap overflow-hidden text-overflow-ellipsis"
-                  >
+                  <h3 class="m-0 white-space-nowrap overflow-hidden text-overflow-ellipsis">
                     {{ room.room.name }}
                   </h3>
-                  <span class="ml-auto flex align-items-center"
-                    ><i class="pi pi-user mr-2"></i>
-                    {{ room.room.participations_count }}</span
-                  >
+                  <span class="ml-auto flex align-items-center"><i class="pi pi-user mr-2"></i>
+                    {{ room.room.participations_count }}</span>
                 </div>
-                <span class="text-sm"
-                  >Created by
-                  <b
-                    >{{ room.room.author.first_name }}
-                    {{ room.room.author.last_name }}</b
-                  ></span
-                >
+                <span class="text-sm">
+                  {{ $t("rooms.createdBy") }}:
+                  <b>{{ room.room.author.first_name }} {{ room.room.author.last_name }}</b>
+                </span>
                 <Divider />
                 <p class="room-description">{{ room.room.description }}</p>
                 <span class="text-xs">{{
@@ -115,14 +82,8 @@
               </div>
             </a>
           </div>
-          <Paginator
-            v-if="rooms.total > rows"
-            :first="startItem"
-            :rows="rows"
-            :totalRecords="this.rooms.total"
-            class="pagination"
-            @page="onPage($event)"
-          ></Paginator>
+          <Paginator v-if="rooms.total > rows" :first="startItem" :rows="rows" :totalRecords="this.rooms.total"
+            class="pagination" @page="onPage($event)"></Paginator>
         </div>
         <div v-else>
           <div class="col-12">
