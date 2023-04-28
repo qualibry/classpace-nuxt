@@ -67,7 +67,6 @@
         </div>
 
         <div class="col-10">
-          <h3>{{ $t("rooms.filters") }}</h3>
           <h4>{{ $t("rooms.searchPost") }}</h4>
           <InputText class="p-inputtext-sm" :placeholder="$t('rooms.searchPlaceholder')" v-model="searchPost"
             @change="searchInPosts" />
