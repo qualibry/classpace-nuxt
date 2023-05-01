@@ -159,9 +159,9 @@ export default {
                 ...this.form,
                 title: '',
                 text: '',
-                description: '',
-                type: 'material'
+                description: ''
             }
+            this.attachments = []
         },
     }
 }

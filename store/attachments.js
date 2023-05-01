@@ -43,7 +43,7 @@ export const actions = {
 
         if(attachments.length) {
             try {
-                const response = await client.apis.attachments.createAttachments({
+                await client.apis.attachments.createAttachments({
                     post_id: postId,
                     assignment_id: assignmentId,
                 }, {
@@ -54,9 +54,9 @@ export const actions = {
                         attachments: attachments,
                     }
                 })
-                let uploadedAttachments = state.items.filter(e => e.id) 
+                // let uploadedAttachments = state.items.filter(e => e.id) 
     
-                commit('SET_ITEMS', uploadedAttachments.concat(response.body.created))
+                // commit('SET_ITEMS', uploadedAttachments.concat(response.body.created))
                 commit('SET_ERRORS', {})
             } catch (e) {
                 //commit('SET_ERRORS', e.response.body.detail)
