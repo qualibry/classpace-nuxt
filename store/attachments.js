@@ -40,27 +40,28 @@ export const actions = {
     async create({ commit, state }, { postId, assignmentId, attachments }) {
         const client = await apiClient
         const accessToken = this.$cookies.get('token')
-        console.log(attachments)
-        
-        try {
-            const response = await client.apis.attachments.createAttachments({
-                post_id: postId,
-                assignment_id: assignmentId,
-            }, {
-                requestInterceptor: (request) => {
-                    request.headers.Authorization = `Bearer ${accessToken}`
-                },
-                requestBody: {
-                    attachments: attachments,
-                }
-            })
-            let uploadedAttachments = state.items.filter(e => e.id) 
 
-            commit('SET_ITEMS', uploadedAttachments.concat(response.body.created))
-            commit('SET_ERRORS', {})
-        } catch (e) {
-            //commit('SET_ERRORS', e.response.body.detail)
-            console.error(e)
+        if(attachments.length) {
+            try {
+                await client.apis.attachments.createAttachments({
+                    post_id: postId,
+                    assignment_id: assignmentId,
+                }, {
+                    requestInterceptor: (request) => {
+                        request.headers.Authorization = `Bearer ${accessToken}`
+                    },
+                    requestBody: {
+                        attachments: attachments,
+                    }
+                })
+                // let uploadedAttachments = state.items.filter(e => e.id) 
+    
+                // commit('SET_ITEMS', uploadedAttachments.concat(response.body.created))
+                commit('SET_ERRORS', {})
+            } catch (e) {
+                //commit('SET_ERRORS', e.response.body.detail)
+                console.error(e)
+            }
         }
     },
 
